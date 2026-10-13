@@ -16,9 +16,10 @@ html,body{margin:0;min-height:100%;font-family:"Nunito","Trebuchet MS",system-ui
 body{overscroll-behavior:none;-webkit-user-select:none;user-select:none}
 #app{max-width:480px;margin:0 auto;min-height:100vh;padding:calc(12px + env(safe-area-inset-top)) 14px calc(18px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:12px}
 button{font:inherit;color:inherit}
-.top{display:flex;justify-content:space-between;align-items:center;gap:10px;color:#fff;font-weight:800}
-.pill{background:rgba(255,255,255,.22);padding:6px 12px;border-radius:999px;white-space:nowrap}
-.icon{border:0;background:rgba(255,255,255,.22);color:#fff;border-radius:50%;width:42px;height:42px;font-size:1.3rem;font-weight:800;cursor:pointer}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px;color:#fff;font-weight:800}
+.tr{display:flex;gap:6px;align-items:center}
+.pill{background:rgba(255,255,255,.22);padding:6px 11px;border-radius:999px;white-space:nowrap}
+.icon{border:0;background:rgba(255,255,255,.22);color:#fff;border-radius:50%;width:42px;height:42px;font-size:1.25rem;font-weight:800;cursor:pointer;flex:none}
 .card{background:#fff;border-radius:22px;padding:16px;box-shadow:0 6px 0 rgba(0,0,0,.12)}
 .btn{border:0;border-radius:18px;padding:16px;font-weight:800;font-size:1.15rem;background:var(--accent);color:#3a2a00;box-shadow:0 5px 0 #c98700;cursor:pointer;width:100%;text-align:center}
 .btn:active{transform:translateY(3px);box-shadow:0 2px 0 #c98700}
@@ -26,19 +27,22 @@ button{font:inherit;color:inherit}
 .btn.green{background:#43d17a;color:#073d1d;box-shadow:0 5px 0 #26a05a}
 .btn.red{background:#ff7b7f;color:#4a0508;box-shadow:0 5px 0 #c9494e}
 .btn.small{padding:10px;font-size:1rem}
+.btn.tile{display:flex;flex-direction:column;align-items:center;gap:2px;padding:12px 6px;font-size:1rem}
+.btn.tile .ti{font-size:1.9rem}
 .btn:disabled{opacity:.5}
 .hero{text-align:center;color:#fff;padding:8px 0}
 .hero h1{margin:4px 0;font-size:1.7rem}
 .hero p{margin:0;opacity:.9;font-weight:700}
-.mascot{font-size:5.5rem;animation:bob 2.2s ease-in-out infinite}
+.mascot{font-size:5rem;animation:bob 2.2s ease-in-out infinite}
 @keyframes bob{50%{transform:translateY(-10px) rotate(-3deg)}}
 .gear{align-self:center;border:0;background:rgba(255,255,255,.2);border-radius:999px;padding:8px 16px;color:#fff;font-weight:800;margin-top:auto}
-h2{margin:0 0 6px;font-size:1.3rem}
+h2{margin:0 0 6px;font-size:1.25rem}
 .title{color:#fff;margin:0;text-align:center;font-size:1.6rem}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.isle{position:relative;border:0;border-radius:22px;background:#fff;padding:12px 8px 10px;box-shadow:0 6px 0 rgba(0,0,0,.14);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px}
-.isle b{font-size:2.6rem;line-height:1;color:var(--bg1)}
-.isle .stars{font-size:1.1rem;letter-spacing:2px}
+.isle{position:relative;border:0;border-radius:22px;background:#fff;padding:12px 8px 10px;box-shadow:0 6px 0 rgba(0,0,0,.14);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px}
+.isle b{font-size:2.5rem;line-height:1;color:var(--bg1)}
+.isle small{font-weight:700;opacity:.65;font-size:.78rem}
+.isle .stars{font-size:1.05rem;letter-spacing:2px}
 .isle.lock{background:#ddd9ee;opacity:.8}
 .isle.lock b{color:#9a93b8}
 .isle em{position:absolute;top:6px;right:10px;font-style:normal}
@@ -47,19 +51,22 @@ h2{margin:0 0 6px;font-size:1.3rem}
 .step{display:flex;align-items:center;gap:12px;text-align:left}
 .step .ic{font-size:2rem}
 .step small{display:block;font-weight:600;opacity:.75}
-.eq{font-size:2.8rem;font-weight:900;text-align:center;margin:6px 0}
+.eq{font-size:2.6rem;font-weight:900;text-align:center;margin:6px 0}
 .eq .ok{color:var(--ok)}
 .say{text-align:center;font-weight:800;opacity:.8}
-.fb{min-height:1.6em;text-align:center;font-weight:900;font-size:1.2rem}
+.fb{min-height:1.6em;text-align:center;font-weight:900;font-size:1.15rem}
 .small{font-size:.9rem;text-align:center;opacity:.8}
-.dots{display:grid;gap:3px;margin:10px auto;max-width:230px}
+.dots{display:grid;gap:3px;margin:10px auto}
 .dots i{display:block;aspect-ratio:1;border-radius:50%}
 .dots i.p{background:#7a5af8}
 .dots i.o{background:#ffb703}
+.twin{display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap}
+.twin b{font-size:1.6rem}
 .chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:8px 0}
 .chips span{padding:4px 9px;border-radius:12px;background:#eee9ff;font-weight:700;font-size:.95rem}
 .chips span.cur{background:var(--bg1);color:#fff;transform:scale(1.12)}
 .tip{background:#fff7da;border-radius:14px;padding:10px 12px;font-weight:700}
+.strat{background:#fff7da;border-radius:14px;padding:10px 12px;font-weight:700;text-align:left;margin:8px 0;display:flex;flex-direction:column;gap:4px}
 .row{display:flex;gap:10px}
 .row .btn{flex:1}
 .prog{flex:1;height:14px;background:rgba(255,255,255,.3);border-radius:9px;overflow:hidden}
@@ -94,12 +101,50 @@ input[type=text]{width:100%;padding:14px;border-radius:14px;border:3px solid #d6
 .toggle{display:flex;justify-content:space-between;align-items:center;padding:10px 0;font-weight:800}
 .toggle button{border:0;border-radius:999px;padding:8px 18px;font-weight:800;background:#ddd;cursor:pointer}
 .toggle button.on{background:#43d17a}
-.modal{position:fixed;inset:0;background:rgba(20,10,60,.7);display:flex;align-items:center;justify-content:center;padding:24px;z-index:50}
+.modal{position:fixed;inset:0;background:rgba(20,10,60,.7);display:flex;align-items:center;justify-content:center;padding:14px;z-index:50}
 .mcard{background:#fff;border-radius:26px;padding:22px;max-width:360px;width:100%;text-align:center;animation:pop .5s;display:flex;flex-direction:column;gap:10px}
+.mcard.wide{max-width:450px;padding:12px;max-height:94vh;overflow:auto;animation:none;gap:8px}
 .toast{position:fixed;left:50%;bottom:calc(30px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#2b2350;color:#fff;padding:12px 18px;border-radius:16px;font-weight:800;z-index:60;max-width:90vw;text-align:center}
 .cf{position:fixed;top:-40px;z-index:70;pointer-events:none;animation:fall linear forwards}
 @keyframes fall{to{transform:translateY(110vh) rotate(540deg)}}
 .err{font-weight:800}
+/* tavola pitagorica */
+.tv{display:grid;grid-template-columns:repeat(11,1fr);gap:2px}
+.tv>div,.tv>button{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border:0;border-radius:5px;font-size:.66rem;font-weight:800;padding:0;color:#2b2350}
+.tv>button{cursor:pointer}
+.tv .h{color:#2b2350;font-size:.8rem}
+.tv .rl{box-shadow:inset 0 0 0 2px #2b2350}
+.tv .sel{background:#2b2350 !important;color:#fff}
+/* trucchi: dita, quadretti */
+.tf{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;width:210px;margin:10px auto}
+.tf i{aspect-ratio:1;border-radius:8px;border:3px solid #7a5af8}
+.tf i.f{background:#7a5af8}
+.tf.r{grid-template-columns:repeat(10,1fr);width:260px;gap:4px}
+.tf.r i{aspect-ratio:1/3;border-radius:5px;border-width:2px}
+.hands{display:flex;gap:26px;justify-content:center;align-items:flex-end;margin:10px 0}
+.hand{display:flex;gap:4px;align-items:flex-end;justify-content:center}
+.hand i{width:20px;border-radius:10px 10px 6px 6px;display:block}
+.hand i.up{height:64px;background:#7a5af8}
+.hand i.dn{height:26px;background:#ffb703}
+.f9{display:flex;gap:6px;justify-content:center;align-items:flex-end;margin:10px 0}
+.f9 i{width:22px;border-radius:11px 11px 6px 6px;display:block}
+.f9 i.l{height:64px;background:#4cc3ff}
+.f9 i.r{height:64px;background:#43d17a}
+.f9 i.fold{height:24px;background:#ffb703}
+/* giochi */
+.mem{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.mc{border:0;border-radius:14px;aspect-ratio:3/4;font-size:1.1rem;font-weight:900;background:#7a5af8;color:#fff;box-shadow:0 4px 0 rgba(0,0,0,.18);cursor:pointer;padding:0}
+.mc.open{background:#fff;color:var(--ink)}
+.mc.done{background:#b9f5cf;color:#0b4a22}
+.tcard{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.tc{border:0;border-radius:18px;padding:22px 0;font-size:1.8rem;font-weight:900;background:#fff;box-shadow:0 5px 0 rgba(0,0,0,.14);cursor:pointer}
+.tc.m{background:#b9f5cf}
+.navg{display:grid;grid-template-columns:repeat(11,1fr);gap:2px}
+.navg>div,.navg>button{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border:0;border-radius:6px;font-size:.7rem;font-weight:800;padding:0}
+.navg .nh{color:#fff;font-size:.85rem}
+.navg button{background:#2f8fdc;color:#fff;cursor:pointer}
+.navg button.miss{background:#d8e4f2;color:#51607a}
+.navg button.hit{background:#43d17a;font-size:1rem}
 </style>
 </head>
 <body>
@@ -109,24 +154,29 @@ input[type=text]{width:100%;padding:14px;border-radius:14px;border:3px solid #d6
 'use strict';
 /* ====== Dati e stato ====== */
 const KEY='tabelline-quest-v1';
-const ORDER=[1,2,10,5,3,4,6,9,7,8];           // ordine di sblocco delle tabelline
+// Ordine "a ancora": prima le tabelline da cui si ricavano le altre (2, 10, 5, 4), poi quelle derivate.
+const ORDER=[1,2,10,5,4,3,9,6,8,7];
+const ROLE={1:'resta uguale',2:'il doppio',10:'aggiungi uno 0',5:'metà del 10',4:'doppio del doppio',3:'2 volte + 1',9:'10 volte − 1',6:'5 volte + 1',8:'doppio del 4',7:'5 volte + 2'};
+const TRICK={
+ 1:'Per 1 il numero resta uguale.',
+ 2:'È il doppio: 2 × 6 = 6 + 6.',
+ 10:'Aggiungi uno zero in fondo: 10 × 6 = 60.',
+ 5:'È la metà del 10: 5 × 6 → 10 × 6 = 60, la metà è 30. Finisce sempre con 0 o 5.',
+ 4:'È il doppio del doppio: 4 × 6 → il doppio di 6 è 12, il doppio di 12 è 24.',
+ 3:'È il doppio più ancora una volta: 3 × 6 = 2 × 6 + 6 = 12 + 6 = 18.',
+ 9:'È dieci volte meno una volta: 9 × 6 = 60 − 6 = 54. Le cifre del risultato fanno sempre 9! Oppure usa le dita.',
+ 6:'È cinque volte più una volta: 6 × 7 = 5 × 7 + 7 = 35 + 7 = 42.',
+ 8:'È il doppio del 4: 8 × 7 → 4 × 7 = 28, il doppio è 56.',
+ 7:'È cinque volte più due volte: 7 × 6 = 5 × 6 + 2 × 6 = 30 + 12 = 42.'};
+const HUE=['#ff9a9a','#ffbe7a','#ffe58a','#bde89a','#86dcb8','#7ccbff','#9aa6ff','#c9a3ff','#ff9fdf','#d4d4d4'];
 const STICKERS=[
  ['🐶','c'],['🐱','c'],['🐰','c'],['🐼','c'],['🐸','c'],['🐥','c'],['🐢','c'],['🐠','c'],['🦋','c'],['🐞','c'],['🐝','c'],['🐧','c'],
  ['🦄','r'],['🦊','r'],['🦁','r'],['🐯','r'],['🐬','r'],['🦉','r'],['🐙','r'],['🦖','r'],
  ['🐉','e'],['👑','e'],['🚀','e'],['💎','e'],['🧚','e'],['🌈','e']];
-const TIPS={
- 1:'Qualsiasi numero per 1 resta uguale!',
- 2:'Per 2 è il doppio del numero: 2+2, 3+3, 4+4…',
- 10:'Per 10 basta aggiungere uno zero in fondo!',
- 5:'Per 5 il risultato finisce sempre con 0 o 5.',
- 3:'Per 3 conta di tre in tre: 3, 6, 9, 12…',
- 4:'Per 4 fai il doppio del doppio!',
- 6:'Per 6 pensa a "per 5" e aggiungi ancora il numero una volta.',
- 9:'Per 9 le cifre del risultato sommate fanno 9! (18 → 1+8 = 9)',
- 7:'Per 7 usa quelle che già sai: 7×6 = 7×5 + 7.',
- 8:'Per 8 fai il doppio del doppio del doppio!'};
-const PHRASES=['Ce la fai! 💪','Pensaci un attimo…','Respira e rispondi 😊','Vai alla grande!','Tu sei più forte della tabellina!'];
+const PHRASES=['Ce la fai! 💪','Pensaci un attimo…','Respira e rispondi 😊','Vai alla grande!','Puoi usare la tavola 🔢 quando vuoi!'];
 const PRAISE=['Bravissima! 🎉','Esatto! ⭐','Grande! 🌟','Perfetto! 👏','Che campionessa! 🏅'];
+const sumCalc=()=>Object.values(S.calc||{}).reduce((a,b)=>a+b,0);
+const sumGames=()=>Object.values(S.games||{}).reduce((a,b)=>a+b,0);
 const BADGES=[
  {i:'🌟',n:'Prima stella',t:()=>Object.values(S.stars).some(v=>v>=1)},
  {i:'🥇',n:'Tre stelle in una tabellina',t:()=>Object.values(S.stars).some(v=>v>=3)},
@@ -135,9 +185,11 @@ const BADGES=[
  {i:'🚀',n:'7 giorni di fila',t:()=>S.streak>=7},
  {i:'💯',n:'100 risposte giuste al primo colpo',t:()=>S.correct>=100},
  {i:'⛰️',n:'Esploratrice: 5 tabelline con stella',t:()=>ORDER.filter(t=>(S.stars[t]||0)>=1).length>=5},
+ {i:'🧠',n:'Calcolo veloce: 30 risposte giuste',t:()=>sumCalc()>=30},
+ {i:'🎲',n:'Giocatrice: 5 giochi completati',t:()=>sumGames()>=5},
  {i:'🎒',n:'10 figurine collezionate',t:()=>S.stickers.length>=10},
  {i:'🏆',n:'Campionessa: tutte le tabelline a 3 stelle',t:()=>ORDER.every(t=>(S.stars[t]||0)>=3)}];
-const def=()=>({name:'',coins:0,stars:{},facts:{},stickers:[],chests:0,streak:0,lastDay:'',missionDay:'',correct:0,perfect:false,badges:[],sound:true,voice:false,unlockAll:false});
+const def=()=>({name:'',coins:0,stars:{},facts:{},stickers:[],chests:0,streak:0,lastDay:'',missionDay:'',correct:0,perfect:false,badges:[],sound:true,voice:false,unlockAll:false,calc:{},games:{},missionEasy:false});
 let S=(()=>{try{return Object.assign(def(),JSON.parse(localStorage.getItem(KEY)||'{}'))}catch(e){return def()}})();
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
 
@@ -152,10 +204,15 @@ const dayStr=d=>d.getFullYear()+'-'+pad2(d.getMonth()+1)+'-'+pad2(d.getDate());
 const today=()=>dayStr(new Date());
 const yesterday=()=>{const d=new Date();d.setDate(d.getDate()-1);return dayStr(d)};
 const key=(a,b)=>a<=b?a+'x'+b:b+'x'+a;
+const idx=n=>ORDER.indexOf(n);
 const mastery=t=>{let n=0;for(let m=1;m<=10;m++){const f=S.facts[key(t,m)];if(f&&f.box>=3)n++}return n};
-const unlocked=t=>{const i=ORDER.indexOf(t);return i<2||S.unlockAll||(S.stars[ORDER[i-1]]||0)>=1};
+const unlocked=t=>{const i=idx(t);return i<2||S.unlockAll||(S.stars[ORDER[i-1]]||0)>=1};
 const shownStreak=()=>(S.lastDay===today()||S.lastDay===yesterday())?S.streak:0;
 const starsFor=n=>n>=10?3:n>=8?2:n>=6?1:0;
+const dita=n=>n===1?'1 dito':n+' dita';
+const alzate=n=>n===1?'1 dito alzato':n+' dita alzate';
+// tabelline "nuove": i fattori che NON compaiono già in una tabellina precedente (commutativa!)
+const newFacts=t=>{const earlier=ORDER.slice(0,idx(t));const out=[];for(let m=1;m<=10;m++)if(!earlier.includes(m))out.push(m);return out};
 function upFact(a,b,ok){
   const k=key(a,b),f=S.facts[k]||(S.facts[k]={box:0,seen:0,wrong:0});
   f.seen++; if(ok)f.box=Math.min(4,f.box+1); else{f.box=0;f.wrong++}
@@ -175,7 +232,7 @@ function beep(freq,dur,type,vol,delay){
 }
 const sfx={
   ok:()=>{beep(660,.1,'triangle',.2);beep(880,.16,'triangle',.2,.1)},
-  bad:()=>{beep(220,.22,'sawtooth',.1)},
+  bad:()=>{beep(260,.2,'triangle',.1)},
   win:()=>{[523,659,784,1047].forEach((f,i)=>beep(f,.18,'triangle',.2,i*.12))},
   chest:()=>{[392,523,659,784,1047].forEach((f,i)=>beep(f,.2,'square',.1,i*.1))}
 };
@@ -204,14 +261,122 @@ function modal(html){
   document.body.appendChild(m);
 }
 
-/* ====== Componenti ====== */
-const bar=back=>`<div class="top">${back?`<button class="icon" data-act="${back}">←</button>`:'<span></span>'}<div><span class="pill">🔥 ${shownStreak()}</span> <span class="pill">🪙 ${S.coins}</span></div></div>`;
-function dots(cols,rows){
-  let h=`<div class="dots" style="grid-template-columns:repeat(${cols},1fr);width:${Math.min(230,cols*24)}px">`;
+/* ====== Strategie e immagini (il cuore del metodo) ====== */
+function dots(cols,rows,px){
+  px=px||24;
+  let h=`<div class="dots" style="grid-template-columns:repeat(${cols},1fr);width:${Math.min(230,cols*px)}px">`;
   for(let r=0;r<rows;r++)for(let c=0;c<cols;c++)h+=`<i class="${r%2?'o':'p'}"></i>`;
   return h+'</div>';
 }
-let cur=null,L=null,Q=null,curTable=0;
+function tenFrame(n,total,cls){
+  let h=`<div class="tf ${cls||''}">`;
+  for(let i=0;i<total;i++)h+=`<i class="${i<n?'f':''}"></i>`;
+  return h+'</div>';
+}
+// scorciatoie di ragionamento: si usa il fattore "più facile" (quello che viene prima nell'ordine delle tabelline)
+function stratLines(a,b,hide){
+  let f=a,o=b;if(idx(b)<idx(a)){f=b;o=a}
+  const r=a*b,R=hide?'<b>?</b>':`<b>${r}</b>`;
+  let L;
+  switch(f){
+    case 1:L=[`Per 1 il numero resta uguale: ${R}`];break;
+    case 10:L=[`${o} con uno zero in fondo: ${R}`];break;
+    case 2:L=[`Il doppio di ${o}: ${o} + ${o} = ${R}`];break;
+    case 5:L=[`10 × ${o} = ${10*o}`,`5 è la metà di 10: la metà di ${10*o} è ${R}`];break;
+    case 4:L=[`Il doppio di ${o} è ${2*o}`,`Il doppio di ${2*o} è ${R}`];break;
+    case 3:L=[`3 × ${o} = 2 × ${o} + ${o}`,`${2*o} + ${o} = ${R}`];break;
+    case 9:L=[`9 × ${o} = 10 × ${o} − ${o}`,`${10*o} − ${o} = ${R}`];if(!hide)L.push(`Controllo: le cifre di ${r} sommate fanno 9 ✔`);break;
+    case 6:L=[`6 × ${o} = 5 × ${o} + ${o}`,`${5*o} + ${o} = ${R}`];break;
+    case 8:L=[`8 è il doppio di 4: 4 × ${o} = ${4*o}`,`Il doppio di ${4*o} è ${R}`];break;
+    default:L=[`7 × ${o} = 5 × ${o} + 2 × ${o}`,`${5*o} + ${2*o} = ${R}`];
+  }
+  if(f!==a&&a!==b)L.unshift(`Girala: ${a} × ${b} = ${b} × ${a}`);
+  return L;
+}
+const stratHTML=(a,b,hide)=>`<div class="strat">${stratLines(a,b,hide).map(l=>`<div>${l}</div>`).join('')}</div>`;
+// metodo delle dita: per il 9 (qualsiasi numero) e per le tabelline 6-10 (entrambi i fattori da 6 a 10)
+const fingerOK=(a,b)=>a===9||b===9||(a>=6&&b>=6);
+function fingerHTML(a,b,hide){
+  const R=hide?'<b>?</b>':`<b>${a*b}</b>`;
+  if(a===9||b===9){
+    const n=a===9?b:a,tens=n-1,un=10-n;
+    const row=Array.from({length:10},(_,i)=>`<i class="${i+1===n?'fold':i+1<n?'l':'r'}"></i>`).join('');
+    return `<div class="f9">${row}</div><div class="strat"><div>Abbasso il dito numero ${n}</div><div>A sinistra: ${dita(tens)} → ${tens} decine = ${tens*10}</div><div>A destra: ${dita(un)} → ${un} unità</div><div>${tens*10} + ${un} = ${R}</div></div>`;
+  }
+  const ua=a-5,ub=b-5,da=5-ua,db=5-ub;
+  const hand=(up,val)=>`<div><div class="hand">${Array.from({length:5},(_,i)=>`<i class="${i<up?'up':'dn'}"></i>`).join('')}</div><div class="small">${val}</div></div>`;
+  return `<div class="hands">${hand(ua,a)}${hand(ub,b)}</div><div class="strat"><div>Per il ${a}: ${alzate(ua)}. Per il ${b}: ${alzate(ub)}.</div><div>Dita alzate: ${ua} + ${ub} = ${ua+ub} → ${(ua+ub)*10}</div><div>Dita abbassate: ${da} e ${db} → ${da} × ${db} = ${da*db}</div><div>${(ua+ub)*10} + ${da*db} = ${R}</div></div>`;
+}
+
+/* ====== Domande (tabelline e calcolo mentale) ====== */
+const mkQ=(kind,o)=>Object.assign({kind,att:0,re:false,hint:false,tav:false},o);
+const mul=(a,b)=>mkQ('mul',{a,b,ans:a*b});
+function genAmici10(n){const out=[];let base=[];for(let i=0;i<n;i++){if(!base.length)base=shuffle([1,2,3,4,5,6,7,8,9]);const a=base.pop();out.push(mkQ('amici10',{a,ans:10-a}))}return out}
+function genAmici100(n){const out=[];let base=[];for(let i=0;i<n;i++){if(!base.length)base=shuffle([10,20,30,40,50,60,70,80,90]);const a=base.pop();out.push(mkQ('amici100',{a,ans:100-a}))}return out}
+function genDec(n){const out=[];for(let i=0;i<n;i++){const u=6+rnd(4),a=u+pick([0,0,10,20,30]);let b=3+rnd(7);while(u+b<=10)b=3+rnd(7);out.push(mkQ('dec',{a,b,ans:a+b}))}return out}
+function genP9(n){const out=[];for(let i=0;i<n;i++){const a=11+rnd(66),b=pick([9,9,19,8,18]);out.push(mkQ('p9',{a,b,ans:a+b}))}return out}
+const GEN={amici10:genAmici10,amici100:genAmici100,dec:genDec,p9:genP9};
+const CALC={
+ amici10:{i:'🔟',n:'Amici del 10',d:'Quanto manca per arrivare a 10? Es. 7 + ? = 10',ex:()=>mkQ('amici10',{a:7,ans:3})},
+ amici100:{i:'💯',n:'Amici del 100',d:'Con le decine: 40 + ? = 100',ex:()=>mkQ('amici100',{a:40,ans:60})},
+ dec:{i:'🪜',n:'Passo dalla decina',d:'8 + 5: prima arrivo a 10, poi aggiungo il resto',ex:()=>mkQ('dec',{a:8,b:5,ans:13})},
+ p9:{i:'➕',n:'Il trucco del +9',d:'24 + 9: aggiungo 10 e tolgo 1',ex:()=>mkQ('p9',{a:24,b:9,ans:33})}};
+function qText(q){
+  const R='<span id="res">?</span>';
+  switch(q.kind){
+    case 'mul':return `${q.a} × ${q.b} = ${R}`;
+    case 'amici10':return `${q.a} + ${R} = 10`;
+    case 'amici100':return `${q.a} + ${R} = 100`;
+    default:return `${q.a} + ${q.b} = ${R}`;
+  }
+}
+function hintHTML(q,rev){
+  const X=rev?`<b>${q.ans}</b>`:'<b>?</b>';
+  switch(q.kind){
+    case 'mul':return stratHTML(q.a,q.b,!rev)+dots(q.a,q.b)+`<div class="small">${q.b} righe da ${q.a} pallini</div>`;
+    case 'amici10':return tenFrame(q.a,10)+`<div class="small">${q.a} quadretti pieni: quanti ne mancano per arrivare a 10?</div>`+(rev?`<div class="tip">Ne mancano ${q.ans}: ${q.a} + ${q.ans} = 10</div>`:'');
+    case 'amici100':return tenFrame(q.a/10,10,'r')+`<div class="small">${q.a/10} decine piene: quante ne mancano per fare 10 decine (cioè 100)?</div>`+(rev?`<div class="tip">Mancano ${q.ans/10} decine = ${q.ans}: ${q.a} + ${q.ans} = 100</div>`:'');
+    case 'dec':{const gap=10-q.a%10,rest=q.b-gap;return `<div class="strat"><div>Da ${q.a} a ${q.a+gap} mancano ${gap}</div><div>Spezzo il ${q.b} in ${gap} e ${rest}</div><div>${q.a} + ${gap} = ${q.a+gap}</div><div>${q.a+gap} + ${rest} = ${X}</div></div>`}
+    default:{const up=Math.ceil(q.b/10)*10,sub=up-q.b;return `<div class="strat"><div>${q.b} è quasi ${up}: ${up} − ${sub}</div><div>${q.a} + ${up} = ${q.a+up}</div><div>${q.a+up} − ${sub} = ${X}</div></div>`}
+  }
+}
+function makeOpts(a,b){
+  const right=a*b;
+  const c=[(a+1)*b,(a-1)*b,a*(b+1),a*(b-1),right+10,right-10,right+1,right-1,right+2,right-2];
+  const uniq=[...new Set(c.filter(v=>v>0&&v!==right))];
+  return shuffle([right,...shuffle(uniq).slice(0,3)]);
+}
+function genericOpts(ans){
+  const c=[ans+1,ans-1,ans+2,ans-2,ans+10,ans-10,ans+5,ans-5].filter(v=>v>0&&v!==ans);
+  return shuffle([ans,...shuffle([...new Set(c)]).slice(0,3)]);
+}
+
+/* ====== Tavola pitagorica (strumento sempre disponibile) ====== */
+function tavola(sel){
+  document.querySelectorAll('.modal.tav').forEach(m=>m.remove());
+  let g='<div class="h"></div>'+Array.from({length:10},(_,c)=>`<div class="h" style="background:${HUE[c]}">${c+1}</div>`).join('');
+  for(let r=1;r<=10;r++){
+    g+=`<div class="h" style="background:${HUE[r-1]}">${r}</div>`;
+    for(let c=1;c<=10;c++){
+      const cls=sel?((r===sel[0]&&c===sel[1])?'sel':(r===sel[0]||c===sel[1])?'rl':''):'';
+      g+=`<button class="${cls}" style="background:${HUE[Math.min(r,c)-1]}" data-act="tavSel" data-a="${r}" data-b="${c}">${r*c}</button>`;
+    }
+  }
+  let info='<div class="small">Tocca un numero: vedi riga, colonna e come si calcola.<br>Ogni colore è una tabellina. I numeri "specchio" hanno lo stesso colore: 7 × 3 = 3 × 7!</div>';
+  if(sel){
+    const [a,b]=sel;
+    info=`<div class="eq" style="font-size:1.8rem;margin:2px 0">${a} × ${b} = ${a*b}</div>`+
+      (a!==b?`<div class="small">e anche ${b} × ${a} = ${a*b}: stessa cosa, girata!</div>`:'')+
+      `<div class="twin">${dots(a,b,11)}${a!==b?'<b>=</b>'+dots(b,a,11):''}</div>`+stratHTML(a,b,false);
+  }
+  const m=document.createElement('div');m.className='modal tav';
+  m.innerHTML=`<div class="mcard wide"><div class="top" style="color:var(--ink)"><b style="font-size:1.2rem">🔢 Tavola Pitagorica</b><button class="icon" style="background:#eee9ff;color:var(--ink)" data-act="closeTav">✕</button></div><div class="tv">${g}</div>${info}</div>`;
+  document.body.appendChild(m);
+}
+
+/* ====== Componenti ====== */
+const bar=(back,notav)=>`<div class="top">${back?`<button class="icon" data-act="${back}">←</button>`:'<span></span>'}<div class="tr">${notav?'':'<button class="icon" data-act="tavola" title="Tavola Pitagorica">🔢</button>'}<span class="pill">🔥 ${shownStreak()}</span><span class="pill">🪙 ${S.coins}</span></div></div>`;
+let cur=null,L=null,Q=null,G=null,curTable=0,again=null;
 
 /* ====== Schermate ====== */
 function welcome(){
@@ -228,38 +393,54 @@ function home(){
   <div class="hero"><div class="mascot">🦊</div><h1>${g}, ${esc(S.name)}!</h1><p>Pronta per le tabelline?</p></div>
   <button class="btn green" data-act="mission">🎯 Missione del giorno ${done?'✅':''}</button>
   <button class="btn" data-act="map">🗺️ Mappa delle tabelline</button>
-  <button class="btn sec" data-act="coll">🎒 Collezione (${S.stickers.length}/${STICKERS.length})${S.chests?' 🎁'+S.chests:''}</button>
+  <div class="row"><button class="btn sec tile" data-act="games"><span class="ti">🎲</span>Giochi</button><button class="btn sec tile" data-act="calcMenu"><span class="ti">🧠</span>Calcolo veloce</button></div>
+  <div class="row"><button class="btn sec tile" data-act="tavola"><span class="ti">🔢</span>Tavola Pitagorica</button><button class="btn sec tile" data-act="coll"><span class="ti">🎒</span>Collezione${S.chests?' 🎁'+S.chests:''}</button></div>
   <button class="gear" data-act="parents">⚙️ Genitori</button>`;
 }
 function map(){
   cur=map;
   const cells=ORDER.map(t=>{
     const un=unlocked(t),st=S.stars[t]||0;
-    return `<button class="isle ${un?'':'lock'}" data-act="${un?'table':'locked'}" data-t="${t}"><b>${t}</b><span class="stars">${'⭐'.repeat(st)}${'☆'.repeat(3-st)}</span><span class="mbar"><i style="width:${mastery(t)*10}%"></i></span>${un?'':'<em>🔒</em>'}</button>`;
+    return `<button class="isle ${un?'':'lock'}" data-act="${un?'table':'locked'}" data-t="${t}"><b>${t}</b><small>${ROLE[t]}</small><span class="stars">${'⭐'.repeat(st)}${'☆'.repeat(3-st)}</span><span class="mbar"><i style="width:${mastery(t)*10}%"></i></span>${un?'':'<em>🔒</em>'}</button>`;
   }).join('');
   $app.innerHTML=`${bar('home')}<h1 class="title">Scegli una tabellina</h1><div class="grid">${cells}</div>
-  <div class="small" style="color:#fff">Prendi almeno 1 ⭐ nella Sfida per sbloccare la prossima!</div>`;
+  <div class="small" style="color:#fff">Prendi almeno 1 ⭐ nella Sfida per sbloccare la prossima! Si parte dalle tabelline "ancora" (2, 10, 5, 4): da lì si ricavano tutte le altre.</div>`;
 }
 function tableScreen(t){
   cur=()=>tableScreen(t);curTable=t;
-  const st=S.stars[t]||0;
+  const st=S.stars[t]||0,nf=newFacts(t),free=10-nf.length;
   $app.innerHTML=`${bar('map')}<h1 class="title">Tabellina del ${t}</h1>
-  <div class="card tip">💡 ${TIPS[t]}</div>
-  <button class="btn sec step" data-act="learn" data-t="${t}"><span class="ic">📖</span><span>Impara<small>Guarda e ripassa passo passo</small></span></button>
+  <div class="card tip">💡 ${TRICK[t]}</div>
+  <div class="card center small" style="opacity:1">Da imparare davvero: <b>${nf.map(m=>t+'×'+m).join(', ')}</b>${free?`<br>Le altre ${free} le sai già dalle altre tabelline (7 × 3 = 3 × 7)!`:''}</div>
+  <button class="btn sec step" data-act="learn" data-t="${t}"><span class="ic">📖</span><span>Impara<small>Il trucco, i disegni, le dita</small></span></button>
   <button class="btn step" data-act="practice" data-t="${t}"><span class="ic">🎯</span><span>Allenati<small>Scegli la risposta, con aiutini</small></span></button>
   <button class="btn green step" data-act="challenge" data-t="${t}"><span class="ic">🏆</span><span>Sfida ${'⭐'.repeat(st)}${'☆'.repeat(3-st)}<small>10 domande: scrivi la risposta</small></span></button>
   <div class="card center"><b>Tabellina imparata:</b> ${mastery(t)}/10</div>`;
 }
+function learnIntro(){
+  const t=L.t,nf=newFacts(t),free=[];for(let m=1;m<=10;m++)if(!nf.includes(m))free.push(m);
+  $app.innerHTML=`${bar('backTable')}<h1 class="title">Impariamo il ${t}</h1>
+  <div class="card"><h2>Il trucco del ${t}</h2><div class="strat"><div>${TRICK[t]}</div></div>
+  ${(t===9||t>=6)?'<div class="small">Per questa tabellina c\'è anche il trucco delle dita 🖐️</div>':''}</div>
+  ${free.length?`<div class="card"><h2>Le sai già! 🎁</h2><div class="small" style="opacity:1">Girando i numeri il risultato non cambia: se sai 3 × 7, sai anche 7 × 3.</div><div class="chips">${free.map(m=>`<span>${t} × ${m} = ${t*m}</span>`).join('')}</div></div>`:''}
+  <div class="card"><h2>Da imparare davvero</h2><div class="chips">${nf.map(m=>`<span>${t} × ${m}</span>`).join('')}</div></div>
+  <button class="btn" data-act="learnNext">Cominciamo! 🚀</button>`;
+}
 function learnScreen(){
   cur=null;
-  const {t,m}=L,r=t*m;
+  if(L.m===0){learnIntro();return}
+  const {t,m}=L,r=t*m,known=idx(m)<idx(t)&&m!==t;
   const chips=Array.from({length:10},(_,i)=>`<span class="${i+1===m?'cur':''}">${t*(i+1)}</span>`).join('');
   $app.innerHTML=`${bar('backTable')}<h1 class="title">Impariamo il ${t}</h1>
-  <div class="card center"><div class="eq">${t} × ${m} = ${r}</div>${dots(t,m)}
-  <div class="small">${m} ${m===1?'riga':'righe'} da ${t} pallini</div>
-  <div class="chips">${chips}</div><div class="tip">${TIPS[t]}</div></div>
-  <button class="btn sec small" data-act="say">🔊 Ascolta</button>
-  <div class="row"><button class="btn sec" data-act="learnPrev" ${m===1?'disabled':''}>⬅️</button>
+  <div class="card center"><div class="eq">${t} × ${m} = ${r}</div>
+  ${known?`<div class="tip">✅ Già vista! È uguale a ${m} × ${t}</div>`:''}
+  <div class="twin">${dots(t,m,13)}${t!==m?'<b>=</b>'+dots(m,t,13):''}</div>
+  ${t!==m?`<div class="small">Se giri i pallini il totale non cambia.</div>`:''}
+  ${stratHTML(t,m,false)}
+  <div class="small">Conta di ${t} in ${t}:</div><div class="chips">${chips}</div></div>
+  <div class="row"><button class="btn sec small" data-act="say">🔊 Ascolta</button>${fingerOK(t,m)?'<button class="btn sec small" data-act="learnFing">🖐️ Dita</button>':''}</div>
+  <div id="lf"></div>
+  <div class="row"><button class="btn sec" data-act="learnPrev">⬅️</button>
   ${m<10?'<button class="btn" data-act="learnNext">Avanti ➡️</button>':`<button class="btn green" data-act="practice" data-t="${t}">Allenati! 🎯</button>`}</div>`;
   speak(`${t} per ${m} fa ${r}`);
 }
@@ -288,8 +469,30 @@ function parents(){
   </div>
   <div class="card"><h2>Mappa dei progressi</h2>
    <div class="heat">${heat}</div>
-   <div class="small">Ogni quadratino è un prodotto (da 1×1 a 10×10): grigio = mai fatto, rosso = da ripassare, verde = saputo bene.</div></div>
+   <div class="small">Ogni quadratino è un prodotto (da 1×1 a 10×10): grigio = mai fatto, rosso = da ripassare, verde = saputo bene. Il risultato conta anche se girato (7×3 = 3×7).</div></div>
+  <div class="card small" style="opacity:1;text-align:left"><b>Come funziona:</b> la tavola pitagorica 🔢 è sempre disponibile e usarla non toglie stelle né monete (non fa avanzare però la barra "saputo bene" di quel prodotto). Il gioco non ha cronometri. Se le risposte sbagliate sono molte, la missione del giorno passa da sola alle risposte a scelta.</div>
   <button class="btn red small" data-act="reset">Azzera tutti i progressi</button>`;
+}
+function gamesMenu(){
+  cur=gamesMenu;
+  $app.innerHTML=`${bar('home')}<h1 class="title">Giochi</h1>
+  <button class="btn step" data-act="memStart"><span class="ic">🃏</span><span>Memory<small>Abbina operazione e risultato</small></span></button>
+  <button class="btn step" data-act="tombStart"><span class="ic">🎱</span><span>Tombola<small>Cerca il risultato sulla cartella</small></span></button>
+  <button class="btn step" data-act="navStart"><span class="ic">🚢</span><span>Battaglia navale<small>Trova il numero sulla griglia (riga × colonna)</small></span></button>
+  <div class="small" style="color:#fff">Nessun cronometro: giocate con calma, anche insieme! 😊</div>`;
+}
+function calcMenu(){
+  cur=calcMenu;
+  const cards=Object.keys(CALC).map(k=>`<button class="btn sec step" data-act="calcIntro" data-k="${k}"><span class="ic">${CALC[k].i}</span><span>${CALC[k].n}<small>${CALC[k].d}${S.calc[k]?` · ✔ ${S.calc[k]}`:''}</small></span></button>`).join('');
+  $app.innerHTML=`${bar('home')}<h1 class="title">Calcolo veloce</h1>
+  <div class="small" style="color:#fff">Scorciatoie per calcolare senza contare sulle dita.</div>${cards}`;
+}
+function calcIntro(k){
+  cur=()=>calcIntro(k);
+  const c=CALC[k],ex=c.ex();
+  $app.innerHTML=`${bar('calcMenu')}<h1 class="title">${c.i} ${c.n}</h1>
+  <div class="card center"><div class="say">Guarda un esempio</div><div class="eq">${qText(ex).replace('?',ex.ans)}</div>${hintHTML(ex,true)}</div>
+  <button class="btn green" data-act="calc" data-k="${k}">Giochiamo! 🎯</button>`;
 }
 
 /* ====== Sessioni di gioco ====== */
@@ -310,58 +513,60 @@ function pickMission(n){
   }
   return out;
 }
-function makeOpts(a,b){
-  const right=a*b;
-  const c=[(a+1)*b,(a-1)*b,a*(b+1),a*(b-1),right+10,right-10,right+1,right-1,right+2,right-2];
-  const uniq=[...new Set(c.filter(v=>v>0&&v!==right))];
-  return shuffle([right,...shuffle(uniq).slice(0,3)]);
-}
-function startSession(type,table){
-  const facts=type==='mission'?pickMission(10):shuffle(Array.from({length:10},(_,i)=>({a:table,b:i+1})));
-  Q={type,table,queue:facts.map(f=>({a:f.a,b:f.b,att:0,re:false,hint:false})),i:0,total:facts.length,done:0,first:0,coins:0,input:'',locked:false,missed:new Set()};
+function startSession(type,table,kind){
+  let qs,mode='type';
+  if(type==='mission'){qs=pickMission(10).map(f=>mul(f.a,f.b));mode=S.missionEasy?'choice':'type'}
+  else if(type==='practice'){qs=shuffle(Array.from({length:10},(_,i)=>mul(table,i+1)));mode='choice'}
+  else if(type==='challenge'){qs=shuffle(Array.from({length:10},(_,i)=>mul(table,i+1)))}
+  else{qs=GEN[kind](10);mode='choice'}
+  Q={type,table,kind,mode,queue:qs,i:0,total:qs.length,done:0,first:0,coins:0,input:'',locked:false,missed:new Set(),active:true};
+  again=()=>startSession(type,table,kind);
   cur=null;renderQ();
 }
 function renderQ(){
   const q=Q.queue[Q.i];if(!q){finish();return}
-  const choice=Q.type==='practice';
+  const choice=Q.mode==='choice';
   const pct=Math.round(Q.done/Q.total*100);
   let body;
   if(choice){
-    if(!q.opts)q.opts=makeOpts(q.a,q.b);
+    if(!q.opts)q.opts=q.kind==='mul'?makeOpts(q.a,q.b):genericOpts(q.ans);
     body=`<div class="opts">${q.opts.map(v=>`<button class="opt" data-act="choose" data-v="${v}">${v}</button>`).join('')}</div>`;
   }else{
     body=`<div class="ans" id="ans">&nbsp;</div><div class="pad">${[1,2,3,4,5,6,7,8,9].map(n=>`<button data-act="key" data-k="${n}">${n}</button>`).join('')}<button data-act="key" data-k="del">⌫</button><button data-act="key" data-k="0">0</button><button class="go" data-act="key" data-k="ok">✔</button></div>`;
   }
-  $app.innerHTML=`<div class="top"><button class="icon" data-act="quit">✕</button><div class="prog"><i style="width:${pct}%"></i></div><span class="pill">🪙 ${Q.coins}</span></div>
+  const isMul=q.kind==='mul';
+  $app.innerHTML=`<div class="top"><button class="icon" data-act="quit">✕</button><div class="prog"><i style="width:${pct}%"></i></div>${isMul?'<button class="icon" data-act="tavola">🔢</button>':''}<span class="pill">🪙 ${Q.coins}</span></div>
   <div class="card"><div class="say">${q.re?'Riproviamo questa! 💪':pick(PHRASES)}</div>
-  <div class="eq">${q.a} × ${q.b} = <span id="res">?</span></div><div id="hint"></div><div class="fb" id="fb"></div></div>
-  ${body}<button class="btn sec small" data-act="hint">💡 Aiutino</button>`;
-  speak(`${q.a} per ${q.b}`);
+  <div class="eq">${qText(q)}</div><div id="hint"></div><div class="fb" id="fb"></div></div>
+  ${body}<div class="row"><button class="btn sec small" data-act="hint">💡 Aiutino</button>${isMul&&fingerOK(q.a,q.b)?'<button class="btn sec small" data-act="fing">🖐️ Dita</button>':''}</div>`;
+  if(isMul)speak(`${q.a} per ${q.b}`);
 }
-function showHint(q){
-  const items=[];for(let k=1;k<q.b;k++)items.push(q.a*k);
-  document.getElementById('hint').innerHTML=dots(q.a,q.b)+`<div class="small">${q.b} righe da ${q.a}. Conta di ${q.a} in ${q.a}: ${items.join(', ')}${items.length?', ':''}<b>?</b></div>`;
-}
+function showHint(q){document.getElementById('hint').innerHTML=hintHTML(q,false)}
 function next(){if(!Q||Q.dead)return;Q.i++;Q.locked=false;Q.input='';renderQ()}
 function updAns(){const e=document.getElementById('ans');if(e)e.innerHTML=Q.input||'&nbsp;'}
 function answer(val){
-  if(!Q||Q.locked)return;
-  const q=Q.queue[Q.i],right=q.a*q.b,choice=Q.type==='practice';
+  if(!Q||Q.locked||Q.dead)return;
+  const q=Q.queue[Q.i],right=q.ans,choice=Q.mode==='choice',isMul=q.kind==='mul';
   const fb=document.getElementById('fb'),res=document.getElementById('res');
   if(val===right){
     Q.locked=true;
     const ft=q.att===0&&!q.hint;
     if(!q.re){Q.done++;if(ft)Q.first++}
-    if(ft){Q.coins++;upFact(q.a,q.b,true)}
+    if(ft){
+      Q.coins++;
+      if(isMul){if(!q.tav)upFact(q.a,q.b,true)}
+      else if(!q.re)S.calc[q.kind]=(S.calc[q.kind]||0)+1;
+    }
     sfx.ok();res.textContent=right;res.classList.add('ok');
     if(choice){const b=$app.querySelector(`[data-v="${val}"]`);if(b)b.classList.add('good')}
-    fb.textContent=pick(PRAISE);speak(`${q.a} per ${q.b} fa ${right}`);
+    fb.textContent=pick(PRAISE);
+    if(isMul)speak(`${q.a} per ${q.b} fa ${right}`);
     setTimeout(next,ft?900:1300);
   }else{
     q.att++;sfx.bad();
     if(q.att===1){
-      upFact(q.a,q.b,false);Q.missed.add(key(q.a,q.b));
-      if(!q.re)Q.queue.push({a:q.a,b:q.b,att:0,re:true,hint:false});
+      if(isMul){upFact(q.a,q.b,false);Q.missed.add(key(q.a,q.b))}
+      if(!q.re)Q.queue.push(Object.assign({},q,{att:0,re:true,hint:false,tav:false,opts:null}));
     }
     if(choice){
       const b=$app.querySelector(`[data-v="${val}"]`);if(b){b.classList.add('bad');b.disabled=true}
@@ -381,7 +586,27 @@ function updateStreak(){
   S.streak=(S.lastDay===yesterday())?S.streak+1:1;
   S.lastDay=t;
 }
+function checkBadges(){
+  const nb=[];
+  BADGES.forEach(b=>{if(!S.badges.includes(b.n)&&b.t()){S.badges.push(b.n);S.coins+=10;nb.push(b)}});
+  return nb;
+}
+function showResult(o){
+  cur=null;
+  $app.innerHTML=`${bar()}<div class="hero"><div class="mascot">🦊</div><h1>${o.msg}</h1><p>${o.sub}</p></div>
+  <div class="card center">
+   ${o.stars!=null?`<div class="big">${'⭐'.repeat(o.stars)}${'☆'.repeat(3-o.stars)}</div>`:''}
+   ${o.line?`<h2>${o.line}</h2>`:''}
+   <div>🪙 +${o.coins} monete</div>
+   ${(o.extra||[]).map(e=>`<div class="err">${e}</div>`).join('')}
+   ${(o.nb||[]).map(b=>`<div class="err">${b.i} Nuova medaglia: ${b.n}!</div>`).join('')}
+  </div>
+  ${o.missed&&o.missed.length?`<div class="card"><h2>Da ripassare</h2><div class="chips">${o.missed.map(m=>`<span>${m}</span>`).join('')}</div></div>`:''}
+  ${again?'<button class="btn" data-act="again">🔁 Ancora!</button>':''}
+  <button class="btn sec" data-act="${o.back}">Torna indietro</button>`;
+}
 function finish(){
+  Q.active=false;
   const {type,table,first,total}=Q;
   let stars=null,gain=0,bonus=0,extra=[];
   S.correct+=first;
@@ -389,36 +614,151 @@ function finish(){
     stars=starsFor(first);const prev=S.stars[table]||0;
     if(stars>prev){S.stars[table]=stars;gain=(stars-prev)*5;if(stars===3){S.chests++;extra.push('🎁 Hai vinto un forziere!')}}
     if(first===total)S.perfect=true;
-    if(stars>=1&&prev===0){const i=ORDER.indexOf(table),nx=ORDER[i+1];if(nx&&!S.unlockAll)extra.push(`🔓 Sbloccata la tabellina del ${nx}!`)}
+    if(stars>=1&&prev===0){const nx=ORDER[idx(table)+1];if(nx&&!S.unlockAll)extra.push(`🔓 Sbloccata la tabellina del ${nx}!`)}
   }
+  const good=first/total;
   if(type==='mission'){
     bonus=5;
     if(S.missionDay!==today()){S.missionDay=today();S.chests++;extra.push('🎁 Missione completata: forziere in regalo!')}
+    if(good<.7&&!S.missionEasy){S.missionEasy=true;extra.push('La prossima missione avrà risposte a scelta, per allenarsi con calma 💛')}
+    else if(good>=.8&&S.missionEasy){S.missionEasy=false;extra.push('Brava! La prossima missione torna con la tastiera 💪')}
   }
+  const nb0=S.coins;
   S.coins+=Q.coins+gain+bonus;
   updateStreak();
-  const nb=[];
-  BADGES.forEach(b=>{if(!S.badges.includes(b.n)&&b.t()){S.badges.push(b.n);S.coins+=10;nb.push(b)}});
+  const nb=checkBadges();
   save();
-  const good=first/total;
+  if(good>=.6||(stars||0)>0){sfx.win();confetti()}
   const msg=good>=.9?'Fantastica!':good>=.6?'Bravissima!':'Ottimo allenamento!';
-  const sub=good>=.9?'Quasi tutto al primo colpo!':good>=.6?'Stai migliorando ogni volta.':'Ogni errore è un passo per imparare. Riprova!';
-  if(good>=.6||stars>0){sfx.win();confetti()}
+  const sub=good>=.9?'Quasi tutto al primo colpo!':good>=.6?'Stai migliorando ogni volta.':'Ogni errore è un passo per imparare. Puoi usare la tavola 🔢 e gli aiutini!';
   const missed=[...Q.missed].map(k=>k.replace('x',' × ')+' = '+k.split('x').reduce((a,b)=>a*b,1));
-  const backAct=type==='mission'?'home':'backTable';
+  showResult({msg,sub,stars,line:`${first} su ${total} al primo colpo`,coins:S.coins-nb0,extra,nb,missed,back:type==='mission'?'home':type==='calc'?'calcMenu':'backTable'});
+}
+function endGame(kind,coins,msg,sub){
+  const c0=S.coins;
+  S.coins+=coins;S.games[kind]=(S.games[kind]||0)+1;
+  updateStreak();const nb=checkBadges();save();
+  sfx.win();confetti();
+  showResult({msg,sub,coins:S.coins-c0,nb,back:'games'});
+}
+
+/* ====== Giochi: Memory, Tombola, Battaglia navale ====== */
+function productsMap(){ // prodotti delle tabelline sbloccate (fattori 2..10) → coppie di fattori
+  const mp=new Map();
+  ORDER.filter(unlocked).forEach(t=>{if(t<2)return;for(let m=2;m<=10;m++){const p=t*m;if(!mp.has(p))mp.set(p,[]);mp.get(p).push([t,m])}});
+  return mp;
+}
+function memStart(){
+  const pool=pickMission(40).filter(f=>f.a>1&&f.b>1),seen=new Set(),pairs=[];
+  for(const f of pool){const p=f.a*f.b;if(seen.has(p))continue;seen.add(p);pairs.push(f);if(pairs.length===6)break}
+  const cards=[];
+  pairs.forEach((f,i)=>{cards.push({id:i,txt:`${f.a} × ${f.b}`,st:0},{id:i,txt:String(f.a*f.b),st:0})});
+  G={kind:'memory',cards:shuffle(cards).map((c,k)=>Object.assign(c,{k})),open:[],matched:0,moves:0,locked:false,pairs:pairs.length};
+  again=memStart;memRender();
+}
+function memRender(){
   cur=null;
-  $app.innerHTML=`${bar()}<div class="hero"><div class="mascot">🦊</div><h1>${msg}</h1><p>${sub}</p></div>
-  <div class="card center">
-   ${stars!==null?`<div class="big">${'⭐'.repeat(stars)}${'☆'.repeat(3-stars)}</div>`:''}
-   <h2>${first} su ${total} al primo colpo</h2>
-   <div>🪙 +${Q.coins+gain+bonus+nb.length*10} monete</div>
-   ${extra.map(e=>`<div class="err">${e}</div>`).join('')}
-   ${nb.map(b=>`<div class="err">${b.i} Nuova medaglia: ${b.n}!</div>`).join('')}
-  </div>
-  ${missed.length?`<div class="card"><h2>Da ripassare</h2><div class="chips">${missed.map(m=>`<span>${m}</span>`).join('')}</div></div>`:''}
-  <button class="btn" data-act="again">🔁 Ancora!</button>
-  <button class="btn sec" data-act="${backAct}">Torna indietro</button>`;
-  Q.finished=true;
+  $app.innerHTML=`${bar('games')}<h1 class="title">Memory</h1><div class="small" style="color:#fff">Abbina l'operazione al suo risultato · Mosse: ${G.moves}</div>
+  <div class="mem">${G.cards.map(c=>`<button class="mc ${c.st===2?'done':c.st===1?'open':''}" data-act="memFlip" data-k="${c.k}">${c.st?c.txt:'❓'}</button>`).join('')}</div>`;
+}
+function memFlip(k){
+  if(!G||G.kind!=='memory'||G.locked)return;
+  const c=G.cards[k];if(c.st!==0)return;
+  c.st=1;G.open.push(c);
+  if(G.open.length===2){
+    G.moves++;G.locked=true;
+    const [x,y]=G.open;
+    if(x.id===y.id){
+      x.st=y.st=2;G.matched++;G.open=[];G.locked=false;sfx.ok();memRender();
+      if(G.matched===G.pairs)setTimeout(()=>{const mv=G.moves;endGame('memory',5+Math.max(0,12-mv),mv<=9?'Che memoria! 🧠':'Bravissima!',`Fatto in ${mv} mosse`)},700);
+    }else{
+      memRender();
+      setTimeout(()=>{if(!G||G.kind!=='memory')return;x.st=0;y.st=0;G.open=[];G.locked=false;memRender()},1000);
+    }
+  }else memRender();
+}
+function tombStart(){
+  const mp=productsMap(),prods=shuffle([...mp.keys()]);
+  const card=prods.slice(0,9).sort((a,b)=>a-b),extra=prods.slice(9,15);
+  const mk=p=>{const pr=pick(mp.get(p));return Math.random()<.5?{a:pr[0],b:pr[1],p}:{a:pr[1],b:pr[0],p}};
+  G={kind:'tomb',card:card.map(p=>({p,m:false})),draws:shuffle([...card.map(mk),...extra.map(mk)]),i:0,err:0,rows:new Set(),msg:'',hint:false,lock:false};
+  again=tombStart;tombRender();
+}
+function tombRender(){
+  cur=null;
+  const d=G.draws[G.i];
+  $app.innerHTML=`${bar('games')}<h1 class="title">Tombola</h1>
+  <div class="card center"><div class="say">Dal sacchetto esce… (${G.i+1}/${G.draws.length})</div><div class="eq">${d.a} × ${d.b}</div><div class="fb">${G.msg}</div>${G.hint?stratHTML(d.a,d.b,true):''}</div>
+  <div class="tcard">${G.card.map((c,k)=>`<button class="tc ${c.m?'m':''}" data-act="tombTap" data-k="${k}">${c.p}${c.m?' ✅':''}</button>`).join('')}</div>
+  <div class="row"><button class="btn sec small" data-act="tombSkip">Non ce l'ho ➡️</button><button class="btn sec small" data-act="tombHint">💡 Aiutino</button></div>
+  <div class="small" style="color:#fff">Tocca il risultato sulla cartella. Se non c'è, vai avanti!</div>`;
+  speak(`${d.a} per ${d.b}`);
+}
+function tombAdvance(){
+  G.i++;G.msg='';G.hint=false;G.lock=false;
+  if(G.i>=G.draws.length){tombFinish();return}
+  tombRender();
+}
+function tombFinish(){
+  const rows=G.rows.size,err=G.err;
+  endGame('tomb',5+rows*2+(err<=2?3:0),'TOMBOLA! 🎉',err===0?'Senza errori!':`Righe: ${rows} · Errori: ${err}`);
+}
+function tombTap(k){
+  if(!G||G.kind!=='tomb'||G.lock)return;
+  const d=G.draws[G.i],c=G.card[k];if(c.m)return;
+  if(c.p===d.p){
+    c.m=true;sfx.ok();G.msg=pick(PRAISE);G.lock=true;
+    for(let r=0;r<3;r++){const a=G.card.slice(r*3,r*3+3);if(a.length===3&&a.every(x=>x.m)&&!G.rows.has(r)){G.rows.add(r);toast('Riga completa! 🎉 +2')}}
+    tombRender();
+    setTimeout(()=>{if(!G||G.kind!=='tomb')return;if(G.card.every(x=>x.m))tombFinish();else tombAdvance()},900);
+  }else{
+    G.err++;sfx.bad();G.msg='Quasi! Cerca il risultato di '+d.a+' × '+d.b;if(G.err>=2)G.hint=true;tombRender();
+  }
+}
+function tombSkip(){
+  if(!G||G.kind!=='tomb'||G.lock)return;
+  const d=G.draws[G.i],has=G.card.some(c=>c.p===d.p&&!c.m);
+  if(has){G.err++;sfx.bad();G.msg='Guarda bene: il risultato ce l\'hai sulla cartella! 👀';G.hint=true;tombRender()}
+  else tombAdvance();
+}
+function navStart(){
+  const prods=shuffle([...productsMap().keys()]).slice(0,5);
+  G={kind:'nav',targets:prods,i:0,shots:0,cells:{},msg:'Tocca una casella: riga × colonna!'};
+  again=navStart;navRender();
+}
+function navRender(){
+  cur=null;
+  const t=G.targets[G.i];
+  let grid='<div class="nh"></div>'+Array.from({length:10},(_,c)=>`<div class="nh">${c+1}</div>`).join('');
+  for(let r=1;r<=10;r++){
+    grid+=`<div class="nh">${r}</div>`;
+    for(let c=1;c<=10;c++){const x=G.cells[r+','+c];grid+=`<button class="${x?x.t:''}" data-act="navShot" data-r="${r}" data-c="${c}">${x?(x.t==='hit'?'🚢':x.p):''}</button>`}
+  }
+  $app.innerHTML=`<div class="top"><button class="icon" data-act="games">←</button><div class="tr"><span class="pill">🎯 ${G.shots}</span><span class="pill">🪙 ${S.coins}</span></div></div>
+  <h1 class="title">Battaglia navale</h1>
+  <div class="card center"><div class="say">Nave ${G.i+1} di ${G.targets.length}: affonda il numero</div><div class="eq">${t}</div><div class="fb">${G.msg}</div></div>
+  <div class="navg">${grid}</div>
+  <div class="small" style="color:#fff">Riga × colonna. Lo stesso numero si nasconde in più caselle: girando i fattori il risultato non cambia!</div>`;
+}
+function navShot(r,c){
+  if(!G||G.kind!=='nav'||G.lock)return;
+  const k=r+','+c;if(G.cells[k])return;
+  const t=G.targets[G.i],p=r*c;G.shots++;
+  if(p===t){
+    for(let a=1;a<=10;a++)for(let b=1;b<=10;b++)if(a*b===t)G.cells[a+','+b]={t:'hit',p:t};
+    sfx.ok();
+    const pairs=[];for(let a=1;a<=10;a++)for(let b=a;b<=10;b++)if(a*b===t)pairs.push(`${a}×${b}`);
+    G.msg=`Colpita! ${t} = ${pairs.join(' = ')}`;G.i++;
+    if(G.i>=G.targets.length){
+      navRender();G.lock=true;
+      setTimeout(()=>endGame('nav',Math.max(3,Math.min(12,22-G.shots)),'Flotta affondata! 🚢',`Con ${G.shots} colpi`),900);
+      return;
+    }
+  }else{
+    G.cells[k]={t:'miss',p};sfx.bad();
+    G.msg=`${r} × ${c} = ${p}: ${p<t?'troppo piccolo ⬆️':'troppo grande ⬇️'}`;
+  }
+  navRender();
 }
 
 /* ====== Forzieri ====== */
@@ -446,18 +786,22 @@ function openChestUI(){
 /* ====== Azioni ====== */
 const A={
   home,map,coll,parents,
+  games:gamesMenu,calcMenu,
   start:()=>{const v=(document.getElementById('nm').value||'').trim();S.name=v||'Campionessa';save();home()},
   table:d=>tableScreen(+d.t),
   backTable:()=>tableScreen(curTable||(L&&L.t)||2),
-  locked:d=>{const i=ORDER.indexOf(+d.t);toast(`Prendi almeno 1 ⭐ nella Sfida del ${ORDER[i-1]} per sbloccarla!`)},
-  learn:d=>{L={t:+d.t,m:1};curTable=+d.t;learnScreen()},
+  locked:d=>{const i=idx(+d.t);toast(`Prendi almeno 1 ⭐ nella Sfida del ${ORDER[i-1]} per sbloccarla!`)},
+  learn:d=>{L={t:+d.t,m:0};curTable=+d.t;learnScreen()},
   learnNext:()=>{if(L.m<10){L.m++;learnScreen()}},
-  learnPrev:()=>{if(L.m>1){L.m--;learnScreen()}},
+  learnPrev:()=>{if(L.m>0){L.m--;learnScreen()}},
+  learnFing:()=>{const e=document.getElementById('lf');if(e)e.innerHTML=`<div class="card center">${fingerHTML(L.t,L.m,false)}</div>`},
   say:()=>speak(`${L.t} per ${L.m} fa ${L.t*L.m}`,true),
   practice:d=>{curTable=+d.t;startSession('practice',+d.t)},
   challenge:d=>{curTable=+d.t;startSession('challenge',+d.t)},
   mission:()=>startSession('mission',0),
-  again:()=>startSession(Q.type,Q.table),
+  calcIntro:d=>calcIntro(d.k),
+  calc:d=>startSession('calc',0,d.k),
+  again:()=>{if(again)again()},
   choose:d=>answer(+d.v),
   key:d=>{
     if(!Q||Q.locked)return;const k=d.k;
@@ -465,10 +809,17 @@ const A={
     if(k==='del')Q.input=Q.input.slice(0,-1);else if(Q.input.length<3)Q.input+=k;
     updAns();
   },
-  hint:()=>{if(!Q||Q.locked)return;const q=Q.queue[Q.i];if(q){q.hint=true;showHint(q)}},
+  hint:()=>{if(!Q||!Q.active||Q.locked)return;const q=Q.queue[Q.i];if(q){q.hint=true;showHint(q)}},
+  fing:()=>{if(!Q||!Q.active||Q.locked)return;const q=Q.queue[Q.i];if(q&&q.kind==='mul'){q.hint=true;document.getElementById('hint').innerHTML=fingerHTML(q.a,q.b,true)}},
+  tavola:()=>{if(Q&&Q.active&&!Q.locked&&Q.queue[Q.i])Q.queue[Q.i].tav=true;tavola(null)},
+  tavSel:d=>tavola([+d.a,+d.b]),
+  closeTav:()=>{document.querySelectorAll('.modal.tav').forEach(m=>m.remove())},
   quit:()=>ask('Vuoi uscire? I progressi di questa partita andranno persi.','doQuit'),
-  doQuit:()=>{A.closeAsk();if(Q){Q.dead=true;const t=Q.type,tb=Q.table;t==='mission'?home():tableScreen(tb)}},
+  doQuit:()=>{A.closeAsk();if(Q){Q.dead=true;Q.active=false;const t=Q.type,tb=Q.table;t==='mission'?home():t==='calc'?calcMenu():tableScreen(tb)}},
   closeAsk:()=>{document.querySelectorAll('.modal').forEach(m=>m.remove())},
+  memStart,memFlip:d=>memFlip(+d.k),
+  tombStart,tombTap:d=>tombTap(+d.k),tombSkip,tombHint:()=>{if(G&&G.kind==='tomb'){G.hint=true;tombRender()}},
+  navStart,navShot:d=>navShot(+d.r,+d.c),
   openChest:openChestUI,
   buyChest:()=>{if(S.coins>=20){S.coins-=20;S.chests++;save();coll()}},
   closeModal:()=>{document.querySelectorAll('.modal').forEach(m=>m.remove());if(cur)cur()},
@@ -476,7 +827,7 @@ const A={
   tgVoice:()=>{S.voice=!S.voice;save();parents()},
   tgUnlock:()=>{S.unlockAll=!S.unlockAll;save();parents()},
   reset:()=>ask('Azzerare davvero tutti i progressi, le monete e le figurine?','doReset'),
-  doReset:()=>{A.closeAsk();const n=S.name;S=def();S.name=n;save();Q=null;L=null;home();toast('Progressi azzerati ✅')}
+  doReset:()=>{A.closeAsk();const n=S.name;S=def();S.name=n;save();Q=null;L=null;G=null;home();toast('Progressi azzerati ✅')}
 };
 $app.addEventListener('click',e=>{
   const b=e.target.closest('[data-act]');if(!b||b.disabled)return;
