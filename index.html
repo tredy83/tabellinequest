@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#5b3fd1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<title>Tabelline Quest</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<style>
+:root{--bg1:#5b3fd1;--bg2:#2bb7c9;--ink:#2b2350;--accent:#ffb703;--ok:#2fb344;--bad:#e5484d}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100%;font-family:"Nunito","Trebuchet MS",system-ui,sans-serif;color:var(--ink);background:linear-gradient(160deg,var(--bg1),var(--bg2)) fixed}
+body{overscroll-behavior:none;-webkit-user-select:none;user-select:none}
+#app{max-width:480px;margin:0 auto;min-height:100vh;padding:calc(12px + env(safe-area-inset-top)) 14px calc(18px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:12px}
+button{font:inherit;color:inherit}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;color:#fff;font-weight:800}
+.pill{background:rgba(255,255,255,.22);padding:6px 12px;border-radius:999px;white-space:nowrap}
+.icon{border:0;background:rgba(255,255,255,.22);color:#fff;border-radius:50%;width:42px;height:42px;font-size:1.3rem;font-weight:800;cursor:pointer}
+.card{background:#fff;border-radius:22px;padding:16px;box-shadow:0 6px 0 rgba(0,0,0,.12)}
+.btn{border:0;border-radius:18px;padding:16px;font-weight:800;font-size:1.15rem;background:var(--accent);color:#3a2a00;box-shadow:0 5px 0 #c98700;cursor:pointer;width:100%;text-align:center}
+.btn:active{transform:translateY(3px);box-shadow:0 2px 0 #c98700}
+.btn.sec{background:#eee9ff;color:var(--ink);box-shadow:0 5px 0 #c5bbee}
+.btn.green{background:#43d17a;color:#073d1d;box-shadow:0 5px 0 #26a05a}
+.btn.red{background:#ff7b7f;color:#4a0508;box-shadow:0 5px 0 #c9494e}
+.btn.small{padding:10px;font-size:1rem}
+.btn:disabled{opacity:.5}
+.hero{text-align:center;color:#fff;padding:8px 0}
+.hero h1{margin:4px 0;font-size:1.7rem}
+.hero p{margin:0;opacity:.9;font-weight:700}
+.mascot{font-size:5.5rem;animation:bob 2.2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-10px) rotate(-3deg)}}
+.gear{align-self:center;border:0;background:rgba(255,255,255,.2);border-radius:999px;padding:8px 16px;color:#fff;font-weight:800;margin-top:auto}
+h2{margin:0 0 6px;font-size:1.3rem}
+.title{color:#fff;margin:0;text-align:center;font-size:1.6rem}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.isle{position:relative;border:0;border-radius:22px;background:#fff;padding:12px 8px 10px;box-shadow:0 6px 0 rgba(0,0,0,.14);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px}
+.isle b{font-size:2.6rem;line-height:1;color:var(--bg1)}
+.isle .stars{font-size:1.1rem;letter-spacing:2px}
+.isle.lock{background:#ddd9ee;opacity:.8}
+.isle.lock b{color:#9a93b8}
+.isle em{position:absolute;top:6px;right:10px;font-style:normal}
+.mbar{width:80%;height:8px;border-radius:9px;background:#e6e1f7;overflow:hidden}
+.mbar i{display:block;height:100%;background:#43d17a}
+.step{display:flex;align-items:center;gap:12px;text-align:left}
+.step .ic{font-size:2rem}
+.step small{display:block;font-weight:600;opacity:.75}
+.eq{font-size:2.8rem;font-weight:900;text-align:center;margin:6px 0}
+.eq .ok{color:var(--ok)}
+.say{text-align:center;font-weight:800;opacity:.8}
+.fb{min-height:1.6em;text-align:center;font-weight:900;font-size:1.2rem}
+.small{font-size:.9rem;text-align:center;opacity:.8}
+.dots{display:grid;gap:3px;margin:10px auto;max-width:230px}
+.dots i{display:block;aspect-ratio:1;border-radius:50%}
+.dots i.p{background:#7a5af8}
+.dots i.o{background:#ffb703}
+.chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:8px 0}
+.chips span{padding:4px 9px;border-radius:12px;background:#eee9ff;font-weight:700;font-size:.95rem}
+.chips span.cur{background:var(--bg1);color:#fff;transform:scale(1.12)}
+.tip{background:#fff7da;border-radius:14px;padding:10px 12px;font-weight:700}
+.row{display:flex;gap:10px}
+.row .btn{flex:1}
+.prog{flex:1;height:14px;background:rgba(255,255,255,.3);border-radius:9px;overflow:hidden}
+.prog i{display:block;height:100%;background:#ffd84d;transition:width .3s}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.opt{border:0;border-radius:20px;padding:22px 0;font-size:2rem;font-weight:900;background:#fff;box-shadow:0 6px 0 rgba(0,0,0,.14);cursor:pointer}
+.opt:active{transform:translateY(3px)}
+.opt.good{background:#b9f5cf;animation:pop .4s}
+.opt.bad{background:#ffc9cb;animation:shake .3s}
+.opt:disabled{opacity:.75}
+@keyframes pop{50%{transform:scale(1.1)}}
+@keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.ans{background:#fff;border-radius:18px;text-align:center;font-size:2.4rem;font-weight:900;padding:8px;min-height:64px;box-shadow:inset 0 3px 0 rgba(0,0,0,.08)}
+.pad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.pad button{border:0;border-radius:18px;padding:16px 0;font-size:1.7rem;font-weight:900;background:#fff;box-shadow:0 5px 0 rgba(0,0,0,.14);cursor:pointer}
+.pad button:active{transform:translateY(3px)}
+.pad .go{background:#43d17a;color:#073d1d}
+.big{font-size:4.5rem;text-align:center}
+.center{text-align:center}
+.stk{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;text-align:center}
+.stk div{background:#f1eefc;border-radius:14px;padding:8px 0;font-size:1.8rem}
+.stk div.no{filter:grayscale(1);opacity:.35}
+.stk div.r{box-shadow:0 0 0 3px #4cc3ff inset}
+.stk div.e{box-shadow:0 0 0 3px #ffb703 inset}
+.badge{display:flex;gap:10px;align-items:center;padding:6px 0;font-weight:700}
+.badge.no{opacity:.35;filter:grayscale(1)}
+.badge .bi{font-size:1.8rem}
+.heat{display:grid;grid-template-columns:repeat(10,1fr);gap:2px}
+.heat div{aspect-ratio:1;border-radius:4px;font-size:.55rem;display:flex;align-items:center;justify-content:center;color:#0006}
+.hb-1{background:#ddd}.hb0{background:#ff8a8a}.hb1{background:#ffb66b}.hb2{background:#ffe27a}.hb3{background:#b5e48c}.hb4{background:#52b788}
+input[type=text]{width:100%;padding:14px;border-radius:14px;border:3px solid #d6cffa;font:inherit;font-weight:800;font-size:1.2rem;text-align:center;color:var(--ink)}
+.toggle{display:flex;justify-content:space-between;align-items:center;padding:10px 0;font-weight:800}
+.toggle button{border:0;border-radius:999px;padding:8px 18px;font-weight:800;background:#ddd;cursor:pointer}
+.toggle button.on{background:#43d17a}
+.modal{position:fixed;inset:0;background:rgba(20,10,60,.7);display:flex;align-items:center;justify-content:center;padding:24px;z-index:50}
+.mcard{background:#fff;border-radius:26px;padding:22px;max-width:360px;width:100%;text-align:center;animation:pop .5s;display:flex;flex-direction:column;gap:10px}
+.toast{position:fixed;left:50%;bottom:calc(30px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#2b2350;color:#fff;padding:12px 18px;border-radius:16px;font-weight:800;z-index:60;max-width:90vw;text-align:center}
+.cf{position:fixed;top:-40px;z-index:70;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(540deg)}}
+.err{font-weight:800}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+(()=>{
+'use strict';
+/* ====== Dati e stato ====== */
+const KEY='tabelline-quest-v1';
+const ORDER=[1,2,10,5,3,4,6,9,7,8];           // ordine di sblocco delle tabelline
+const STICKERS=[
+ ['🐶','c'],['🐱','c'],['🐰','c'],['🐼','c'],['🐸','c'],['🐥','c'],['🐢','c'],['🐠','c'],['🦋','c'],['🐞','c'],['🐝','c'],['🐧','c'],
+ ['🦄','r'],['🦊','r'],['🦁','r'],['🐯','r'],['🐬','r'],['🦉','r'],['🐙','r'],['🦖','r'],
+ ['🐉','e'],['👑','e'],['🚀','e'],['💎','e'],['🧚','e'],['🌈','e']];
+const TIPS={
+ 1:'Qualsiasi numero per 1 resta uguale!',
+ 2:'Per 2 è il doppio del numero: 2+2, 3+3, 4+4…',
+ 10:'Per 10 basta aggiungere uno zero in fondo!',
+ 5:'Per 5 il risultato finisce sempre con 0 o 5.',
+ 3:'Per 3 conta di tre in tre: 3, 6, 9, 12…',
+ 4:'Per 4 fai il doppio del doppio!',
+ 6:'Per 6 pensa a "per 5" e aggiungi ancora il numero una volta.',
+ 9:'Per 9 le cifre del risultato sommate fanno 9! (18 → 1+8 = 9)',
+ 7:'Per 7 usa quelle che già sai: 7×6 = 7×5 + 7.',
+ 8:'Per 8 fai il doppio del doppio del doppio!'};
+const PHRASES=['Ce la fai! 💪','Pensaci un attimo…','Respira e rispondi 😊','Vai alla grande!','Tu sei più forte della tabellina!'];
+const PRAISE=['Bravissima! 🎉','Esatto! ⭐','Grande! 🌟','Perfetto! 👏','Che campionessa! 🏅'];
+const BADGES=[
+ {i:'🌟',n:'Prima stella',t:()=>Object.values(S.stars).some(v=>v>=1)},
+ {i:'🥇',n:'Tre stelle in una tabellina',t:()=>Object.values(S.stars).some(v=>v>=3)},
+ {i:'🎯',n:'Sfida perfetta (10 su 10)',t:()=>S.perfect},
+ {i:'🔥',n:'3 giorni di fila',t:()=>S.streak>=3},
+ {i:'🚀',n:'7 giorni di fila',t:()=>S.streak>=7},
+ {i:'💯',n:'100 risposte giuste al primo colpo',t:()=>S.correct>=100},
+ {i:'⛰️',n:'Esploratrice: 5 tabelline con stella',t:()=>ORDER.filter(t=>(S.stars[t]||0)>=1).length>=5},
+ {i:'🎒',n:'10 figurine collezionate',t:()=>S.stickers.length>=10},
+ {i:'🏆',n:'Campionessa: tutte le tabelline a 3 stelle',t:()=>ORDER.every(t=>(S.stars[t]||0)>=3)}];
+const def=()=>({name:'',coins:0,stars:{},facts:{},stickers:[],chests:0,streak:0,lastDay:'',missionDay:'',correct:0,perfect:false,badges:[],sound:true,voice:false,unlockAll:false});
+let S=(()=>{try{return Object.assign(def(),JSON.parse(localStorage.getItem(KEY)||'{}'))}catch(e){return def()}})();
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+
+/* ====== Utilità ====== */
+const $app=document.getElementById('app');
+const rnd=n=>Math.floor(Math.random()*n);
+const pick=a=>a[rnd(a.length)];
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=rnd(i+1);[a[i],a[j]]=[a[j],a[i]]}return a};
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const pad2=n=>String(n).padStart(2,'0');
+const dayStr=d=>d.getFullYear()+'-'+pad2(d.getMonth()+1)+'-'+pad2(d.getDate());
+const today=()=>dayStr(new Date());
+const yesterday=()=>{const d=new Date();d.setDate(d.getDate()-1);return dayStr(d)};
+const key=(a,b)=>a<=b?a+'x'+b:b+'x'+a;
+const mastery=t=>{let n=0;for(let m=1;m<=10;m++){const f=S.facts[key(t,m)];if(f&&f.box>=3)n++}return n};
+const unlocked=t=>{const i=ORDER.indexOf(t);return i<2||S.unlockAll||(S.stars[ORDER[i-1]]||0)>=1};
+const shownStreak=()=>(S.lastDay===today()||S.lastDay===yesterday())?S.streak:0;
+const starsFor=n=>n>=10?3:n>=8?2:n>=6?1:0;
+function upFact(a,b,ok){
+  const k=key(a,b),f=S.facts[k]||(S.facts[k]={box:0,seen:0,wrong:0});
+  f.seen++; if(ok)f.box=Math.min(4,f.box+1); else{f.box=0;f.wrong++}
+}
+
+/* ====== Suoni, voce, effetti ====== */
+let ac;
+function beep(freq,dur,type,vol,delay){
+  if(!S.sound)return;
+  try{
+    ac=ac||new (window.AudioContext||window.webkitAudioContext)();
+    const o=ac.createOscillator(),g=ac.createGain(),t=ac.currentTime+(delay||0);
+    o.type=type||'sine';o.frequency.value=freq;
+    g.gain.setValueAtTime(vol||.15,t);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+    o.connect(g);g.connect(ac.destination);o.start(t);o.stop(t+dur);
+  }catch(e){}
+}
+const sfx={
+  ok:()=>{beep(660,.1,'triangle',.2);beep(880,.16,'triangle',.2,.1)},
+  bad:()=>{beep(220,.22,'sawtooth',.1)},
+  win:()=>{[523,659,784,1047].forEach((f,i)=>beep(f,.18,'triangle',.2,i*.12))},
+  chest:()=>{[392,523,659,784,1047].forEach((f,i)=>beep(f,.2,'square',.1,i*.1))}
+};
+function speak(txt,force){
+  if(!(S.voice||force)||!('speechSynthesis' in window))return;
+  try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(txt);u.lang='it-IT';u.rate=.9;speechSynthesis.speak(u)}catch(e){}
+}
+function confetti(){
+  for(let i=0;i<36;i++){
+    const s=document.createElement('span');s.className='cf';
+    s.textContent=pick(['⭐','🎉','✨','🎈','💜','🌟']);
+    s.style.left=rnd(100)+'vw';s.style.fontSize=(16+rnd(18))+'px';
+    s.style.animationDuration=(1.6+Math.random()*1.4)+'s';s.style.animationDelay=(Math.random()*.4)+'s';
+    document.body.appendChild(s);setTimeout(()=>s.remove(),3600);
+  }
+}
+function toast(t){const d=document.createElement('div');d.className='toast';d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),2400)}
+function ask(msg,yes){
+  const m=document.createElement('div');m.className='modal';
+  m.innerHTML='<div class="mcard"><h2>'+msg+'</h2><button class="btn red" data-act="'+yes+'">Sì, procedi</button><button class="btn sec" data-act="closeAsk">Annulla</button></div>';
+  document.body.appendChild(m);
+}
+function modal(html){
+  const m=document.createElement('div');m.className='modal';
+  m.innerHTML='<div class="mcard">'+html+'<button class="btn" data-act="closeModal">Ok!</button></div>';
+  document.body.appendChild(m);
+}
+
+/* ====== Componenti ====== */
+const bar=back=>`<div class="top">${back?`<button class="icon" data-act="${back}">←</button>`:'<span></span>'}<div><span class="pill">🔥 ${shownStreak()}</span> <span class="pill">🪙 ${S.coins}</span></div></div>`;
+function dots(cols,rows){
+  let h=`<div class="dots" style="grid-template-columns:repeat(${cols},1fr);width:${Math.min(230,cols*24)}px">`;
+  for(let r=0;r<rows;r++)for(let c=0;c<cols;c++)h+=`<i class="${r%2?'o':'p'}"></i>`;
+  return h+'</div>';
+}
+let cur=null,L=null,Q=null,curTable=0;
+
+/* ====== Schermate ====== */
+function welcome(){
+  cur=null;
+  $app.innerHTML=`<div class="hero"><div class="mascot">🦊</div><h1>Tabelline Quest</h1><p>Come ti chiami?</p></div>
+  <div class="card"><input id="nm" type="text" maxlength="20" placeholder="Il tuo nome" autocomplete="off"></div>
+  <button class="btn green" data-act="start">Iniziamo l'avventura! 🚀</button>`;
+}
+function home(){
+  cur=home;
+  const h=new Date().getHours(),g=h<13?'Buongiorno':h<18?'Buon pomeriggio':'Buonasera';
+  const done=S.missionDay===today();
+  $app.innerHTML=`${bar()}
+  <div class="hero"><div class="mascot">🦊</div><h1>${g}, ${esc(S.name)}!</h1><p>Pronta per le tabelline?</p></div>
+  <button class="btn green" data-act="mission">🎯 Missione del giorno ${done?'✅':''}</button>
+  <button class="btn" data-act="map">🗺️ Mappa delle tabelline</button>
+  <button class="btn sec" data-act="coll">🎒 Collezione (${S.stickers.length}/${STICKERS.length})${S.chests?' 🎁'+S.chests:''}</button>
+  <button class="gear" data-act="parents">⚙️ Genitori</button>`;
+}
+function map(){
+  cur=map;
+  const cells=ORDER.map(t=>{
+    const un=unlocked(t),st=S.stars[t]||0;
+    return `<button class="isle ${un?'':'lock'}" data-act="${un?'table':'locked'}" data-t="${t}"><b>${t}</b><span class="stars">${'⭐'.repeat(st)}${'☆'.repeat(3-st)}</span><span class="mbar"><i style="width:${mastery(t)*10}%"></i></span>${un?'':'<em>🔒</em>'}</button>`;
+  }).join('');
+  $app.innerHTML=`${bar('home')}<h1 class="title">Scegli una tabellina</h1><div class="grid">${cells}</div>
+  <div class="small" style="color:#fff">Prendi almeno 1 ⭐ nella Sfida per sbloccare la prossima!</div>`;
+}
+function tableScreen(t){
+  cur=()=>tableScreen(t);curTable=t;
+  const st=S.stars[t]||0;
+  $app.innerHTML=`${bar('map')}<h1 class="title">Tabellina del ${t}</h1>
+  <div class="card tip">💡 ${TIPS[t]}</div>
+  <button class="btn sec step" data-act="learn" data-t="${t}"><span class="ic">📖</span><span>Impara<small>Guarda e ripassa passo passo</small></span></button>
+  <button class="btn step" data-act="practice" data-t="${t}"><span class="ic">🎯</span><span>Allenati<small>Scegli la risposta, con aiutini</small></span></button>
+  <button class="btn green step" data-act="challenge" data-t="${t}"><span class="ic">🏆</span><span>Sfida ${'⭐'.repeat(st)}${'☆'.repeat(3-st)}<small>10 domande: scrivi la risposta</small></span></button>
+  <div class="card center"><b>Tabellina imparata:</b> ${mastery(t)}/10</div>`;
+}
+function learnScreen(){
+  cur=null;
+  const {t,m}=L,r=t*m;
+  const chips=Array.from({length:10},(_,i)=>`<span class="${i+1===m?'cur':''}">${t*(i+1)}</span>`).join('');
+  $app.innerHTML=`${bar('backTable')}<h1 class="title">Impariamo il ${t}</h1>
+  <div class="card center"><div class="eq">${t} × ${m} = ${r}</div>${dots(t,m)}
+  <div class="small">${m} ${m===1?'riga':'righe'} da ${t} pallini</div>
+  <div class="chips">${chips}</div><div class="tip">${TIPS[t]}</div></div>
+  <button class="btn sec small" data-act="say">🔊 Ascolta</button>
+  <div class="row"><button class="btn sec" data-act="learnPrev" ${m===1?'disabled':''}>⬅️</button>
+  ${m<10?'<button class="btn" data-act="learnNext">Avanti ➡️</button>':`<button class="btn green" data-act="practice" data-t="${t}">Allenati! 🎯</button>`}</div>`;
+  speak(`${t} per ${m} fa ${r}`);
+}
+function coll(){
+  cur=coll;
+  const owned=new Set(S.stickers);
+  const stk=STICKERS.map(s=>`<div class="${owned.has(s[0])?s[1]==='r'?'r':s[1]==='e'?'e':'':'no'}">${owned.has(s[0])?s[0]:'❓'}</div>`).join('');
+  const bd=BADGES.map(b=>`<div class="badge ${S.badges.includes(b.n)?'':'no'}"><span class="bi">${b.i}</span><span>${b.n}</span></div>`).join('');
+  $app.innerHTML=`${bar('home')}<h1 class="title">La mia collezione</h1>
+  <div class="card center"><div class="big">🎁</div>
+  ${S.chests>0?`<button class="btn green" data-act="openChest">Apri forziere (${S.chests})</button>`:`<button class="btn" data-act="buyChest" ${S.coins<20?'disabled':''}>Compra forziere 🪙20</button>`}
+  <div class="small">I forzieri si vincono con missioni e 3 stelle!</div></div>
+  <div class="card"><h2>Figurine</h2><div class="stk">${stk}</div></div>
+  <div class="card"><h2>Medaglie</h2>${bd}</div>`;
+}
+function parents(){
+  cur=parents;
+  let heat='';
+  for(let a=1;a<=10;a++)for(let b=1;b<=10;b++){const f=S.facts[key(a,b)];heat+=`<div class="hb${f?f.box:-1}">${a*b}</div>`}
+  $app.innerHTML=`${bar('home')}<h1 class="title">Area genitori</h1>
+  <div class="card"><h2>Nome</h2><input id="nm" type="text" maxlength="20" value="${esc(S.name)}"></div>
+  <div class="card">
+   <div class="toggle"><span>🔊 Suoni</span><button class="${S.sound?'on':''}" data-act="tgSound">${S.sound?'Sì':'No'}</button></div>
+   <div class="toggle"><span>🗣️ Voce che legge le tabelline</span><button class="${S.voice?'on':''}" data-act="tgVoice">${S.voice?'Sì':'No'}</button></div>
+   <div class="toggle"><span>🔓 Sblocca tutte le tabelline</span><button class="${S.unlockAll?'on':''}" data-act="tgUnlock">${S.unlockAll?'Sì':'No'}</button></div>
+  </div>
+  <div class="card"><h2>Mappa dei progressi</h2>
+   <div class="heat">${heat}</div>
+   <div class="small">Ogni quadratino è un prodotto (da 1×1 a 10×10): grigio = mai fatto, rosso = da ripassare, verde = saputo bene.</div></div>
+  <button class="btn red small" data-act="reset">Azzera tutti i progressi</button>`;
+}
+
+/* ====== Sessioni di gioco ====== */
+function pickMission(n){
+  const seen=new Map();
+  ORDER.filter(unlocked).forEach(t=>{for(let m=1;m<=10;m++){
+    const k=key(t,m);if(seen.has(k))continue;
+    const f=S.facts[k];let w=Math.pow(5-(f?f.box:0),2)+(f&&f.wrong?2:0)+(f?0:3);
+    if(t===1||m===1)w*=.2;
+    seen.set(k,{a:t,b:m,w});
+  }});
+  const pool=[...seen.values()],out=[];
+  while(out.length<n&&pool.length){
+    const tot=pool.reduce((s,x)=>s+x.w,0);let r=Math.random()*tot,i=0;
+    for(;i<pool.length-1;i++){r-=pool[i].w;if(r<=0)break}
+    const x=pool.splice(i,1)[0];
+    out.push(Math.random()<.5?{a:x.a,b:x.b}:{a:x.b,b:x.a});
+  }
+  return out;
+}
+function makeOpts(a,b){
+  const right=a*b;
+  const c=[(a+1)*b,(a-1)*b,a*(b+1),a*(b-1),right+10,right-10,right+1,right-1,right+2,right-2];
+  const uniq=[...new Set(c.filter(v=>v>0&&v!==right))];
+  return shuffle([right,...shuffle(uniq).slice(0,3)]);
+}
+function startSession(type,table){
+  const facts=type==='mission'?pickMission(10):shuffle(Array.from({length:10},(_,i)=>({a:table,b:i+1})));
+  Q={type,table,queue:facts.map(f=>({a:f.a,b:f.b,att:0,re:false,hint:false})),i:0,total:facts.length,done:0,first:0,coins:0,input:'',locked:false,missed:new Set()};
+  cur=null;renderQ();
+}
+function renderQ(){
+  const q=Q.queue[Q.i];if(!q){finish();return}
+  const choice=Q.type==='practice';
+  const pct=Math.round(Q.done/Q.total*100);
+  let body;
+  if(choice){
+    if(!q.opts)q.opts=makeOpts(q.a,q.b);
+    body=`<div class="opts">${q.opts.map(v=>`<button class="opt" data-act="choose" data-v="${v}">${v}</button>`).join('')}</div>`;
+  }else{
+    body=`<div class="ans" id="ans">&nbsp;</div><div class="pad">${[1,2,3,4,5,6,7,8,9].map(n=>`<button data-act="key" data-k="${n}">${n}</button>`).join('')}<button data-act="key" data-k="del">⌫</button><button data-act="key" data-k="0">0</button><button class="go" data-act="key" data-k="ok">✔</button></div>`;
+  }
+  $app.innerHTML=`<div class="top"><button class="icon" data-act="quit">✕</button><div class="prog"><i style="width:${pct}%"></i></div><span class="pill">🪙 ${Q.coins}</span></div>
+  <div class="card"><div class="say">${q.re?'Riproviamo questa! 💪':pick(PHRASES)}</div>
+  <div class="eq">${q.a} × ${q.b} = <span id="res">?</span></div><div id="hint"></div><div class="fb" id="fb"></div></div>
+  ${body}<button class="btn sec small" data-act="hint">💡 Aiutino</button>`;
+  speak(`${q.a} per ${q.b}`);
+}
+function showHint(q){
+  const items=[];for(let k=1;k<q.b;k++)items.push(q.a*k);
+  document.getElementById('hint').innerHTML=dots(q.a,q.b)+`<div class="small">${q.b} righe da ${q.a}. Conta di ${q.a} in ${q.a}: ${items.join(', ')}${items.length?', ':''}<b>?</b></div>`;
+}
+function next(){if(!Q||Q.dead)return;Q.i++;Q.locked=false;Q.input='';renderQ()}
+function updAns(){const e=document.getElementById('ans');if(e)e.innerHTML=Q.input||'&nbsp;'}
+function answer(val){
+  if(!Q||Q.locked)return;
+  const q=Q.queue[Q.i],right=q.a*q.b,choice=Q.type==='practice';
+  const fb=document.getElementById('fb'),res=document.getElementById('res');
+  if(val===right){
+    Q.locked=true;
+    const ft=q.att===0&&!q.hint;
+    if(!q.re){Q.done++;if(ft)Q.first++}
+    if(ft){Q.coins++;upFact(q.a,q.b,true)}
+    sfx.ok();res.textContent=right;res.classList.add('ok');
+    if(choice){const b=$app.querySelector(`[data-v="${val}"]`);if(b)b.classList.add('good')}
+    fb.textContent=pick(PRAISE);speak(`${q.a} per ${q.b} fa ${right}`);
+    setTimeout(next,ft?900:1300);
+  }else{
+    q.att++;sfx.bad();
+    if(q.att===1){
+      upFact(q.a,q.b,false);Q.missed.add(key(q.a,q.b));
+      if(!q.re)Q.queue.push({a:q.a,b:q.b,att:0,re:true,hint:false});
+    }
+    if(choice){
+      const b=$app.querySelector(`[data-v="${val}"]`);if(b){b.classList.add('bad');b.disabled=true}
+      fb.textContent='Quasi! Riprova 😊';showHint(q);
+    }else if(q.att>=2){
+      Q.locked=true;if(!q.re)Q.done++;
+      res.textContent=right;fb.textContent=`Era ${right}. La rivedremo! 😉`;
+      setTimeout(next,2200);
+    }else{
+      fb.textContent='Quasi! Riprova 😊';showHint(q);Q.input='';updAns();
+    }
+  }
+}
+function updateStreak(){
+  const t=today();
+  if(S.lastDay===t)return;
+  S.streak=(S.lastDay===yesterday())?S.streak+1:1;
+  S.lastDay=t;
+}
+function finish(){
+  const {type,table,first,total}=Q;
+  let stars=null,gain=0,bonus=0,extra=[];
+  S.correct+=first;
+  if(type==='challenge'){
+    stars=starsFor(first);const prev=S.stars[table]||0;
+    if(stars>prev){S.stars[table]=stars;gain=(stars-prev)*5;if(stars===3){S.chests++;extra.push('🎁 Hai vinto un forziere!')}}
+    if(first===total)S.perfect=true;
+    if(stars>=1&&prev===0){const i=ORDER.indexOf(table),nx=ORDER[i+1];if(nx&&!S.unlockAll)extra.push(`🔓 Sbloccata la tabellina del ${nx}!`)}
+  }
+  if(type==='mission'){
+    bonus=5;
+    if(S.missionDay!==today()){S.missionDay=today();S.chests++;extra.push('🎁 Missione completata: forziere in regalo!')}
+  }
+  S.coins+=Q.coins+gain+bonus;
+  updateStreak();
+  const nb=[];
+  BADGES.forEach(b=>{if(!S.badges.includes(b.n)&&b.t()){S.badges.push(b.n);S.coins+=10;nb.push(b)}});
+  save();
+  const good=first/total;
+  const msg=good>=.9?'Fantastica!':good>=.6?'Bravissima!':'Ottimo allenamento!';
+  const sub=good>=.9?'Quasi tutto al primo colpo!':good>=.6?'Stai migliorando ogni volta.':'Ogni errore è un passo per imparare. Riprova!';
+  if(good>=.6||stars>0){sfx.win();confetti()}
+  const missed=[...Q.missed].map(k=>k.replace('x',' × ')+' = '+k.split('x').reduce((a,b)=>a*b,1));
+  const backAct=type==='mission'?'home':'backTable';
+  cur=null;
+  $app.innerHTML=`${bar()}<div class="hero"><div class="mascot">🦊</div><h1>${msg}</h1><p>${sub}</p></div>
+  <div class="card center">
+   ${stars!==null?`<div class="big">${'⭐'.repeat(stars)}${'☆'.repeat(3-stars)}</div>`:''}
+   <h2>${first} su ${total} al primo colpo</h2>
+   <div>🪙 +${Q.coins+gain+bonus+nb.length*10} monete</div>
+   ${extra.map(e=>`<div class="err">${e}</div>`).join('')}
+   ${nb.map(b=>`<div class="err">${b.i} Nuova medaglia: ${b.n}!</div>`).join('')}
+  </div>
+  ${missed.length?`<div class="card"><h2>Da ripassare</h2><div class="chips">${missed.map(m=>`<span>${m}</span>`).join('')}</div></div>`:''}
+  <button class="btn" data-act="again">🔁 Ancora!</button>
+  <button class="btn sec" data-act="${backAct}">Torna indietro</button>`;
+  Q.finished=true;
+}
+
+/* ====== Forzieri ====== */
+function drawSticker(){
+  const owned=new Set(S.stickers),left=STICKERS.filter(s=>!owned.has(s[0]));
+  if(!left.length)return null;
+  const r=Math.random(),want=r<.7?'c':r<.95?'r':'e';
+  let pool=left.filter(s=>s[1]===want);if(!pool.length)pool=left;
+  const s=pick(pool);S.stickers.push(s[0]);return s;
+}
+function openChestUI(){
+  if(S.chests<=0)return;
+  S.chests--;const s=drawSticker();
+  sfx.chest();confetti();
+  if(s){
+    const lab={c:'Figurina comune',r:'Figurina rara! ✨',e:'Figurina EPICA!! 🤩'}[s[1]];
+    modal(`<div class="big">${s[0]}</div><h2>${lab}</h2>`);
+  }else{
+    S.coins+=10;
+    modal(`<div class="big">🪙</div><h2>Hai già tutte le figurine! +10 monete</h2>`);
+  }
+  save();
+}
+
+/* ====== Azioni ====== */
+const A={
+  home,map,coll,parents,
+  start:()=>{const v=(document.getElementById('nm').value||'').trim();S.name=v||'Campionessa';save();home()},
+  table:d=>tableScreen(+d.t),
+  backTable:()=>tableScreen(curTable||(L&&L.t)||2),
+  locked:d=>{const i=ORDER.indexOf(+d.t);toast(`Prendi almeno 1 ⭐ nella Sfida del ${ORDER[i-1]} per sbloccarla!`)},
+  learn:d=>{L={t:+d.t,m:1};curTable=+d.t;learnScreen()},
+  learnNext:()=>{if(L.m<10){L.m++;learnScreen()}},
+  learnPrev:()=>{if(L.m>1){L.m--;learnScreen()}},
+  say:()=>speak(`${L.t} per ${L.m} fa ${L.t*L.m}`,true),
+  practice:d=>{curTable=+d.t;startSession('practice',+d.t)},
+  challenge:d=>{curTable=+d.t;startSession('challenge',+d.t)},
+  mission:()=>startSession('mission',0),
+  again:()=>startSession(Q.type,Q.table),
+  choose:d=>answer(+d.v),
+  key:d=>{
+    if(!Q||Q.locked)return;const k=d.k;
+    if(k==='ok'){if(Q.input!=='')answer(+Q.input);return}
+    if(k==='del')Q.input=Q.input.slice(0,-1);else if(Q.input.length<3)Q.input+=k;
+    updAns();
+  },
+  hint:()=>{if(!Q||Q.locked)return;const q=Q.queue[Q.i];if(q){q.hint=true;showHint(q)}},
+  quit:()=>ask('Vuoi uscire? I progressi di questa partita andranno persi.','doQuit'),
+  doQuit:()=>{A.closeAsk();if(Q){Q.dead=true;const t=Q.type,tb=Q.table;t==='mission'?home():tableScreen(tb)}},
+  closeAsk:()=>{document.querySelectorAll('.modal').forEach(m=>m.remove())},
+  openChest:openChestUI,
+  buyChest:()=>{if(S.coins>=20){S.coins-=20;S.chests++;save();coll()}},
+  closeModal:()=>{document.querySelectorAll('.modal').forEach(m=>m.remove());if(cur)cur()},
+  tgSound:()=>{S.sound=!S.sound;save();parents()},
+  tgVoice:()=>{S.voice=!S.voice;save();parents()},
+  tgUnlock:()=>{S.unlockAll=!S.unlockAll;save();parents()},
+  reset:()=>ask('Azzerare davvero tutti i progressi, le monete e le figurine?','doReset'),
+  doReset:()=>{A.closeAsk();const n=S.name;S=def();S.name=n;save();Q=null;L=null;home();toast('Progressi azzerati ✅')}
+};
+$app.addEventListener('click',e=>{
+  const b=e.target.closest('[data-act]');if(!b||b.disabled)return;
+  const f=A[b.dataset.act];if(f)f(b.dataset);
+});
+document.addEventListener('click',e=>{
+  const b=e.target.closest('.modal [data-act]');if(!b)return;
+  const f=A[b.dataset.act];if(f)f(b.dataset);
+});
+$app.addEventListener('change',e=>{
+  if(e.target.id==='nm'&&S.name){const v=e.target.value.trim().slice(0,20);if(v){S.name=v;save()}}
+});
+
+if(S.name)home();else welcome();
+if('serviceWorker' in navigator&&location.protocol.indexOf('http')===0){
+  navigator.serviceWorker.register('sw.js').catch(()=>{});
+}
+})();
+</script>
+</body>
+</html>

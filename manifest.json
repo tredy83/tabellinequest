@@ -1,0 +1,15 @@
+{
+  "name": "Tabelline Quest",
+  "short_name": "Tabelline",
+  "description": "Gioco per imparare le tabelline con stelle, monete e figurine",
+  "lang": "it",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#5b3fd1",
+  "theme_color": "#5b3fd1",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
