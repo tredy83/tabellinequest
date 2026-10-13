@@ -1,5 +1,5 @@
 // Service worker minimale: permette di giocare anche offline dopo la prima apertura.
-const CACHE = 'tabelline-quest-v2';
+const CACHE = 'tabelline-quest-v3';
 const FILES = ['./', 'index.html', 'manifest.json', 'icon.svg'];
 
 self.addEventListener('install', e => {

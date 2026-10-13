@@ -12,7 +12,7 @@ Invece di far ripetere a memoria la filastrocca (3×1=3, 3×2=6…), il gioco in
 - **Trucco delle dita 🖐️**: per il 9 (si abbassa un dito) e per le tabelline dal 6 al 10 (dita alzate = decine, dita abbassate si moltiplicano per le unità).
 - **Aiutino con il ragionamento**, non con il risultato.
 - **Calcolo veloce** 🧠: Amici del 10, Amici del 100, Passo dalla decina (8 + 5 → 10, poi 3), Trucco del +9 (+10 e −1).
-- **Giochi** 🎲: Memory (operazione ↔ risultato), Tombola (cerca il risultato sulla cartella), Battaglia navale numerica (trova il numero sulla griglia della tavola: riga × colonna).
+- **Giochi** 🎲: Memory (operazione ↔ risultato), Tombola (cerca il risultato sulla cartella), Battaglia navale numerica (trova il numero sulla griglia della tavola: riga × colonna). Hanno **5 livelli** che salgono con le stelle delle Sfide (un livello ogni 6 ⭐): più coppie nel Memory, cartelle più grandi e più estrazioni nella Tombola, più navi nella Battaglia navale. Le moltiplicazioni sono mescolate per non ripetersi di continuo (le uscite da poco pesano meno) e circa 1 su 3 può essere di una tabellina non ancora sbloccata; si può spegnere dall'area genitori.
 - **Si adatta**: la Missione del giorno pesca di più le moltiplicazioni sbagliate o poco ripassate; se ci sono troppi errori passa da sola alle risposte a scelta, poi torna alla tastiera quando va meglio.
 
 ## Per ogni tabellina
@@ -25,7 +25,11 @@ Le tabelline si sbloccano una alla volta (ordine: 1, 2, 10, 5, 4, 3, 9, 6, 8, 7)
 
 ## Ricompense
 
-Monete 🪙, giorni di fila 🔥, forzieri 🎁 con 26 figurine (comuni, rare, epiche) e medaglie 🏅.
+Monete 🪙, giorni di fila 🔥, medaglie 🏅 e **36 figurine** (comuni, rare, epiche) da trovare nei forzieri 🎁.
+
+- **Il prezzo del forziere sale** con le figurine già raccolte: `15 monete + 4 per ogni figurina` (la 1ª costa 15, la 20ª 91, l'ultima 155; per averle tutte comprandole servono 3060 monete).
+- **Forzieri gratis**: uno ogni 3 missioni del giorno e uno la prima volta che si prendono le 3 ⭐ in una tabellina.
+- I valori sono in cima allo script: `CHEST_BASE`, `CHEST_STEP`, `CHEST_EVERY` (e la tabella `LV` per i livelli dei giochi).
 
 ## Area genitori (⚙️ nella home)
 

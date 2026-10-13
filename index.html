@@ -136,6 +136,8 @@ input[type=text]{width:100%;padding:14px;border-radius:14px;border:3px solid #d6
 .mc{border:0;border-radius:14px;aspect-ratio:3/4;font-size:1.1rem;font-weight:900;background:#7a5af8;color:#fff;box-shadow:0 4px 0 rgba(0,0,0,.18);cursor:pointer;padding:0}
 .mc.open{background:#fff;color:var(--ink)}
 .mc.done{background:#b9f5cf;color:#0b4a22}
+.mem.c5{grid-template-columns:repeat(5,1fr)}
+.mem.c5 .mc{font-size:.85rem}
 .tcard{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .tc{border:0;border-radius:18px;padding:22px 0;font-size:1.8rem;font-weight:900;background:#fff;box-shadow:0 5px 0 rgba(0,0,0,.14);cursor:pointer}
 .tc.m{background:#b9f5cf}
@@ -170,9 +172,9 @@ const TRICK={
  7:'È cinque volte più due volte: 7 × 6 = 5 × 6 + 2 × 6 = 30 + 12 = 42.'};
 const HUE=['#ff9a9a','#ffbe7a','#ffe58a','#bde89a','#86dcb8','#7ccbff','#9aa6ff','#c9a3ff','#ff9fdf','#d4d4d4'];
 const STICKERS=[
- ['🐶','c'],['🐱','c'],['🐰','c'],['🐼','c'],['🐸','c'],['🐥','c'],['🐢','c'],['🐠','c'],['🦋','c'],['🐞','c'],['🐝','c'],['🐧','c'],
- ['🦄','r'],['🦊','r'],['🦁','r'],['🐯','r'],['🐬','r'],['🦉','r'],['🐙','r'],['🦖','r'],
- ['🐉','e'],['👑','e'],['🚀','e'],['💎','e'],['🧚','e'],['🌈','e']];
+ ['🐶','c'],['🐱','c'],['🐰','c'],['🐼','c'],['🐸','c'],['🐥','c'],['🐢','c'],['🐠','c'],['🦋','c'],['🐞','c'],['🐝','c'],['🐧','c'],['🐮','c'],['🐷','c'],['🐹','c'],['🦆','c'],
+ ['🦄','r'],['🦊','r'],['🦁','r'],['🐯','r'],['🐬','r'],['🦉','r'],['🐙','r'],['🦖','r'],['🦈','r'],['🦩','r'],['🐺','r'],
+ ['🐉','e'],['👑','e'],['🚀','e'],['💎','e'],['🧚','e'],['🌈','e'],['🏰','e'],['🔮','e'],['🪐','e']];
 const PHRASES=['Ce la fai! 💪','Pensaci un attimo…','Respira e rispondi 😊','Vai alla grande!','Puoi usare la tavola 🔢 quando vuoi!'];
 const PRAISE=['Bravissima! 🎉','Esatto! ⭐','Grande! 🌟','Perfetto! 👏','Che campionessa! 🏅'];
 const sumCalc=()=>Object.values(S.calc||{}).reduce((a,b)=>a+b,0);
@@ -189,7 +191,7 @@ const BADGES=[
  {i:'🎲',n:'Giocatrice: 5 giochi completati',t:()=>sumGames()>=5},
  {i:'🎒',n:'10 figurine collezionate',t:()=>S.stickers.length>=10},
  {i:'🏆',n:'Campionessa: tutte le tabelline a 3 stelle',t:()=>ORDER.every(t=>(S.stars[t]||0)>=3)}];
-const def=()=>({name:'',coins:0,stars:{},facts:{},stickers:[],chests:0,streak:0,lastDay:'',missionDay:'',correct:0,perfect:false,badges:[],sound:true,voice:false,unlockAll:false,calc:{},games:{},missionEasy:false});
+const def=()=>({name:'',coins:0,stars:{},facts:{},stickers:[],chests:0,streak:0,lastDay:'',missionDay:'',correct:0,perfect:false,badges:[],sound:true,voice:false,unlockAll:false,calc:{},games:{},missionEasy:false,missionDays:0,recent:[],gamesNew:true});
 let S=(()=>{try{return Object.assign(def(),JSON.parse(localStorage.getItem(KEY)||'{}'))}catch(e){return def()}})();
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
 
@@ -209,6 +211,18 @@ const mastery=t=>{let n=0;for(let m=1;m<=10;m++){const f=S.facts[key(t,m)];if(f&
 const unlocked=t=>{const i=idx(t);return i<2||S.unlockAll||(S.stars[ORDER[i-1]]||0)>=1};
 const shownStreak=()=>(S.lastDay===today()||S.lastDay===yesterday())?S.streak:0;
 const starsFor=n=>n>=10?3:n>=8?2:n>=6?1:0;
+// --- Forzieri: il prezzo sale con le figurine già raccolte; un forziere gratis ogni 3 missioni del giorno ---
+const CHEST_BASE=15,CHEST_STEP=4,CHEST_EVERY=3;
+const chestCost=()=>CHEST_BASE+CHEST_STEP*S.stickers.length;
+// --- Livello dei giochi: sale con le stelle prese nelle Sfide (1 livello ogni 6 stelle, massimo 5) ---
+const totalStars=()=>Object.values(S.stars).reduce((a,b)=>a+b,0);
+const gameLevel=()=>Math.min(5,1+Math.floor(totalStars()/6));
+const LV=[null,
+ {mem:4,tomb:6,draws:8,nav:3},
+ {mem:5,tomb:6,draws:10,nav:4},
+ {mem:6,tomb:9,draws:12,nav:4},
+ {mem:8,tomb:9,draws:15,nav:5},
+ {mem:10,tomb:9,draws:18,nav:6}];
 const dita=n=>n===1?'1 dito':n+' dita';
 const alzate=n=>n===1?'1 dito alzato':n+' dita alzate';
 // tabelline "nuove": i fattori che NON compaiono già in una tabellina precedente (commutativa!)
@@ -444,6 +458,12 @@ function learnScreen(){
   ${m<10?'<button class="btn" data-act="learnNext">Avanti ➡️</button>':`<button class="btn green" data-act="practice" data-t="${t}">Allenati! 🎯</button>`}</div>`;
   speak(`${t} per ${m} fa ${r}`);
 }
+function shopHTML(){
+  const full=S.stickers.length>=STICKERS.length,cost=chestCost();
+  if(S.chests>0)return `<button class="btn green" data-act="openChest">Apri forziere (${S.chests})</button>`;
+  if(full)return '<div class="err">Hai tutte le figurine! 🏆</div>';
+  return `<button class="btn" data-act="buyChest" ${S.coins<cost?'disabled':''}>Compra forziere 🪙${cost}</button><div class="small">${S.coins<cost?`Ti mancano ${cost-S.coins} monete`:'Hai abbastanza monete!'}</div>`;
+}
 function coll(){
   cur=coll;
   const owned=new Set(S.stickers);
@@ -451,8 +471,8 @@ function coll(){
   const bd=BADGES.map(b=>`<div class="badge ${S.badges.includes(b.n)?'':'no'}"><span class="bi">${b.i}</span><span>${b.n}</span></div>`).join('');
   $app.innerHTML=`${bar('home')}<h1 class="title">La mia collezione</h1>
   <div class="card center"><div class="big">🎁</div>
-  ${S.chests>0?`<button class="btn green" data-act="openChest">Apri forziere (${S.chests})</button>`:`<button class="btn" data-act="buyChest" ${S.coins<20?'disabled':''}>Compra forziere 🪙20</button>`}
-  <div class="small">I forzieri si vincono con missioni e 3 stelle!</div></div>
+  ${shopHTML()}
+  <div class="small">Più figurine hai, più costa il prossimo forziere: le ultime sono le più speciali! ✨<br>Forziere gratis: ogni ${CHEST_EVERY} missioni del giorno e con le 3 ⭐ di una tabellina.</div></div>
   <div class="card"><h2>Figurine</h2><div class="stk">${stk}</div></div>
   <div class="card"><h2>Medaglie</h2>${bd}</div>`;
 }
@@ -466,16 +486,25 @@ function parents(){
    <div class="toggle"><span>🔊 Suoni</span><button class="${S.sound?'on':''}" data-act="tgSound">${S.sound?'Sì':'No'}</button></div>
    <div class="toggle"><span>🗣️ Voce che legge le tabelline</span><button class="${S.voice?'on':''}" data-act="tgVoice">${S.voice?'Sì':'No'}</button></div>
    <div class="toggle"><span>🔓 Sblocca tutte le tabelline</span><button class="${S.unlockAll?'on':''}" data-act="tgUnlock">${S.unlockAll?'Sì':'No'}</button></div>
+   <div class="toggle"><span>🎲 Nei giochi, ogni tanto, anche tabelline nuove</span><button class="${S.gamesNew!==false?'on':''}" data-act="tgGamesNew">${S.gamesNew!==false?'Sì':'No'}</button></div>
   </div>
   <div class="card"><h2>Mappa dei progressi</h2>
    <div class="heat">${heat}</div>
    <div class="small">Ogni quadratino è un prodotto (da 1×1 a 10×10): grigio = mai fatto, rosso = da ripassare, verde = saputo bene. Il risultato conta anche se girato (7×3 = 3×7).</div></div>
-  <div class="card small" style="opacity:1;text-align:left"><b>Come funziona:</b> la tavola pitagorica 🔢 è sempre disponibile e usarla non toglie stelle né monete (non fa avanzare però la barra "saputo bene" di quel prodotto). Il gioco non ha cronometri. Se le risposte sbagliate sono molte, la missione del giorno passa da sola alle risposte a scelta.</div>
+  <div class="card small" style="opacity:1;text-align:left"><b>Come funziona:</b> la tavola pitagorica 🔢 è sempre disponibile e usarla non toglie stelle né monete (non fa avanzare però la barra "saputo bene" di quel prodotto). Il gioco non ha cronometri. Se le risposte sbagliate sono molte, la missione del giorno passa da sola alle risposte a scelta.<br><b>Forzieri:</b> ${CHEST_BASE} monete + ${CHEST_STEP} per ogni figurina già raccolta (ora ${chestCost()}); uno gratis ogni ${CHEST_EVERY} missioni del giorno. <b>Giochi:</b> 5 livelli che salgono con le stelle delle Sfide (ora livello ${gameLevel()}).</div>
   <button class="btn red small" data-act="reset">Azzera tutti i progressi</button>`;
+}
+function levelCard(){
+  const lv=gameLevel(),c=LV[lv],ts=totalStars(),left=Math.max(0,lv*6-ts);
+  const pct=lv>=5?100:Math.max(0,Math.min(100,Math.round((ts-(lv-1)*6)/6*100)));
+  return `<div class="card center"><b>Livello ${lv}${lv>=5?' · il massimo! 🏆':''}</b>
+  <div class="mbar" style="margin:8px auto"><i style="width:${pct}%"></i></div>
+  <div class="small" style="opacity:1">Memory ${c.mem} coppie · Tombola ${c.tomb} numeri, ${c.draws} estrazioni · Navale ${c.nav} navi</div>
+  <div class="small">${lv>=5?'Hai raggiunto il livello più alto!':`Ancora ${left} ⭐ nelle Sfide per il livello ${lv+1}: più carte, cartelle più grandi, più navi.`}</div></div>`;
 }
 function gamesMenu(){
   cur=gamesMenu;
-  $app.innerHTML=`${bar('home')}<h1 class="title">Giochi</h1>
+  $app.innerHTML=`${bar('home')}<h1 class="title">Giochi</h1>${levelCard()}
   <button class="btn step" data-act="memStart"><span class="ic">🃏</span><span>Memory<small>Abbina operazione e risultato</small></span></button>
   <button class="btn step" data-act="tombStart"><span class="ic">🎱</span><span>Tombola<small>Cerca il risultato sulla cartella</small></span></button>
   <button class="btn step" data-act="navStart"><span class="ic">🚢</span><span>Battaglia navale<small>Trova il numero sulla griglia (riga × colonna)</small></span></button>
@@ -609,17 +638,22 @@ function finish(){
   Q.active=false;
   const {type,table,first,total}=Q;
   let stars=null,gain=0,bonus=0,extra=[];
-  S.correct+=first;
+  S.correct+=first;const lv0=gameLevel();
   if(type==='challenge'){
     stars=starsFor(first);const prev=S.stars[table]||0;
     if(stars>prev){S.stars[table]=stars;gain=(stars-prev)*5;if(stars===3){S.chests++;extra.push('🎁 Hai vinto un forziere!')}}
     if(first===total)S.perfect=true;
+    if(gameLevel()>lv0)extra.push(`⬆️ Livello ${gameLevel()} nei giochi!`);
     if(stars>=1&&prev===0){const nx=ORDER[idx(table)+1];if(nx&&!S.unlockAll)extra.push(`🔓 Sbloccata la tabellina del ${nx}!`)}
   }
   const good=first/total;
   if(type==='mission'){
     bonus=5;
-    if(S.missionDay!==today()){S.missionDay=today();S.chests++;extra.push('🎁 Missione completata: forziere in regalo!')}
+    if(S.missionDay!==today()){
+      S.missionDay=today();S.missionDays=(S.missionDays||0)+1;
+      if(S.missionDays%CHEST_EVERY===0){S.chests++;extra.push('🎁 Missione completata: forziere in regalo!')}
+      else{const left=CHEST_EVERY-S.missionDays%CHEST_EVERY;extra.push(`🎁 Ancora ${left} ${left===1?'missione del giorno':'missioni del giorno'} per un forziere in regalo!`)}
+    }
     if(good<.7&&!S.missionEasy){S.missionEasy=true;extra.push('La prossima missione avrà risposte a scelta, per allenarsi con calma 💛')}
     else if(good>=.8&&S.missionEasy){S.missionEasy=false;extra.push('Brava! La prossima missione torna con la tastiera 💪')}
   }
@@ -643,23 +677,49 @@ function endGame(kind,coins,msg,sub){
 }
 
 /* ====== Giochi: Memory, Tombola, Battaglia navale ====== */
-function productsMap(){ // prodotti delle tabelline sbloccate (fattori 2..10) → coppie di fattori
-  const mp=new Map();
-  ORDER.filter(unlocked).forEach(t=>{if(t<2)return;for(let m=2;m<=10;m++){const p=t*m;if(!mp.has(p))mp.set(p,[]);mp.get(p).push([t,m])}});
-  return mp;
+// Tutte le moltiplicazioni 2..10 × 2..10 (7×3 e 3×7 sono la stessa).
+// "known": almeno una delle due tabelline è già sbloccata; le altre sono "nuove".
+function gamePool(){
+  const out=[];
+  for(let a=2;a<=10;a++)for(let b=a;b<=10;b++)out.push({a,b,p:a*b,known:unlocked(a)||unlocked(b)});
+  return out;
+}
+// Sceglie n moltiplicazioni con prodotti tutti diversi. Più peso a quelle che si sanno meno,
+// poco peso a quelle uscite da poco, e varietà: una tabellina già uscita in questa partita pesa meno.
+// Le "nuove" (tabellina non ancora sbloccata) pesano la metà e sono al massimo 1 su 3;
+// i genitori possono spegnerle del tutto.
+function gamePick(n){
+  const all=gamePool(),on=S.gamesNew!==false,cap=on?Math.floor(n/3):0;
+  const out=[],prods=new Set(),cnt={},rec=new Set(S.recent||[]);let nfresh=0;
+  while(out.length<n){
+    let c=all.filter(f=>!prods.has(f.p)&&(f.known||nfresh<cap));
+    if(!c.length&&on)c=all.filter(f=>!prods.has(f.p));
+    if(!c.length)break;
+    const ws=c.map(f=>{
+      const fa=S.facts[key(f.a,f.b)];
+      let w=1+(4-(fa?fa.box:0))*.5;
+      if(!f.known)w*=.5;
+      if(rec.has(key(f.a,f.b)))w*=.15;
+      return w/(1+(cnt[f.a]||0)+(cnt[f.b]||0));
+    });
+    let r=Math.random()*ws.reduce((x,y)=>x+y,0),k=0;
+    for(;k<c.length-1;k++){r-=ws[k];if(r<=0)break}
+    const f=c[k];out.push(f);prods.add(f.p);cnt[f.a]=(cnt[f.a]||0)+1;cnt[f.b]=(cnt[f.b]||0)+1;if(!f.known)nfresh++;
+  }
+  S.recent=[...(S.recent||[]),...out.map(f=>key(f.a,f.b))].slice(-40);
+  save();
+  return out;
 }
 function memStart(){
-  const pool=pickMission(40).filter(f=>f.a>1&&f.b>1),seen=new Set(),pairs=[];
-  for(const f of pool){const p=f.a*f.b;if(seen.has(p))continue;seen.add(p);pairs.push(f);if(pairs.length===6)break}
-  const cards=[];
-  pairs.forEach((f,i)=>{cards.push({id:i,txt:`${f.a} × ${f.b}`,st:0},{id:i,txt:String(f.a*f.b),st:0})});
+  const lv=LV[gameLevel()],pairs=gamePick(lv.mem),cards=[];
+  pairs.forEach((f,i)=>{const sw=Math.random()<.5;cards.push({id:i,txt:sw?`${f.b} × ${f.a}`:`${f.a} × ${f.b}`,st:0},{id:i,txt:String(f.p),st:0})});
   G={kind:'memory',cards:shuffle(cards).map((c,k)=>Object.assign(c,{k})),open:[],matched:0,moves:0,locked:false,pairs:pairs.length};
   again=memStart;memRender();
 }
 function memRender(){
   cur=null;
   $app.innerHTML=`${bar('games')}<h1 class="title">Memory</h1><div class="small" style="color:#fff">Abbina l'operazione al suo risultato · Mosse: ${G.moves}</div>
-  <div class="mem">${G.cards.map(c=>`<button class="mc ${c.st===2?'done':c.st===1?'open':''}" data-act="memFlip" data-k="${c.k}">${c.st?c.txt:'❓'}</button>`).join('')}</div>`;
+  <div class="mem ${G.cards.length%5===0?'c5':''}">${G.cards.map(c=>`<button class="mc ${c.st===2?'done':c.st===1?'open':''}" data-act="memFlip" data-k="${c.k}">${c.st?c.txt:'❓'}</button>`).join('')}</div>`;
 }
 function memFlip(k){
   if(!G||G.kind!=='memory'||G.locked)return;
@@ -670,7 +730,7 @@ function memFlip(k){
     const [x,y]=G.open;
     if(x.id===y.id){
       x.st=y.st=2;G.matched++;G.open=[];G.locked=false;sfx.ok();memRender();
-      if(G.matched===G.pairs)setTimeout(()=>{const mv=G.moves;endGame('memory',5+Math.max(0,12-mv),mv<=9?'Che memoria! 🧠':'Bravissima!',`Fatto in ${mv} mosse`)},700);
+      if(G.matched===G.pairs)setTimeout(()=>{const mv=G.moves;endGame('memory',5+Math.max(0,2*G.pairs-mv),mv<=Math.round(G.pairs*1.5)?'Che memoria! 🧠':'Bravissima!',`Fatto in ${mv} mosse`)},700);
     }else{
       memRender();
       setTimeout(()=>{if(!G||G.kind!=='memory')return;x.st=0;y.st=0;G.open=[];G.locked=false;memRender()},1000);
@@ -678,10 +738,10 @@ function memFlip(k){
   }else memRender();
 }
 function tombStart(){
-  const mp=productsMap(),prods=shuffle([...mp.keys()]);
-  const card=prods.slice(0,9).sort((a,b)=>a-b),extra=prods.slice(9,15);
-  const mk=p=>{const pr=pick(mp.get(p));return Math.random()<.5?{a:pr[0],b:pr[1],p}:{a:pr[1],b:pr[0],p}};
-  G={kind:'tomb',card:card.map(p=>({p,m:false})),draws:shuffle([...card.map(mk),...extra.map(mk)]),i:0,err:0,rows:new Set(),msg:'',hint:false,lock:false};
+  const lv=LV[gameLevel()],picks=gamePick(lv.draws);
+  const card=picks.slice(0,lv.tomb),extra=picks.slice(lv.tomb);
+  const mk=f=>Math.random()<.5?{a:f.a,b:f.b,p:f.p}:{a:f.b,b:f.a,p:f.p};
+  G={kind:'tomb',card:card.map(f=>f.p).sort((a,b)=>a-b).map(p=>({p,m:false})),draws:shuffle([...card.map(mk),...extra.map(mk)]),i:0,err:0,rows:new Set(),msg:'',hint:false,lock:false};
   again=tombStart;tombRender();
 }
 function tombRender(){
@@ -722,7 +782,7 @@ function tombSkip(){
   else tombAdvance();
 }
 function navStart(){
-  const prods=shuffle([...productsMap().keys()]).slice(0,5);
+  const lv=LV[gameLevel()],prods=gamePick(lv.nav).map(f=>f.p);
   G={kind:'nav',targets:prods,i:0,shots:0,cells:{},msg:'Tocca una casella: riga × colonna!'};
   again=navStart;navRender();
 }
@@ -751,7 +811,7 @@ function navShot(r,c){
     G.msg=`Colpita! ${t} = ${pairs.join(' = ')}`;G.i++;
     if(G.i>=G.targets.length){
       navRender();G.lock=true;
-      setTimeout(()=>endGame('nav',Math.max(3,Math.min(12,22-G.shots)),'Flotta affondata! 🚢',`Con ${G.shots} colpi`),900);
+      setTimeout(()=>endGame('nav',Math.max(3,Math.min(12,12+G.targets.length*2-G.shots)),'Flotta affondata! 🚢',`Con ${G.shots} colpi`),900);
       return;
     }
   }else{
@@ -821,11 +881,12 @@ const A={
   tombStart,tombTap:d=>tombTap(+d.k),tombSkip,tombHint:()=>{if(G&&G.kind==='tomb'){G.hint=true;tombRender()}},
   navStart,navShot:d=>navShot(+d.r,+d.c),
   openChest:openChestUI,
-  buyChest:()=>{if(S.coins>=20){S.coins-=20;S.chests++;save();coll()}},
+  buyChest:()=>{const c=chestCost();if(S.stickers.length<STICKERS.length&&S.coins>=c){S.coins-=c;S.chests++;save();coll()}},
   closeModal:()=>{document.querySelectorAll('.modal').forEach(m=>m.remove());if(cur)cur()},
   tgSound:()=>{S.sound=!S.sound;save();parents()},
   tgVoice:()=>{S.voice=!S.voice;save();parents()},
   tgUnlock:()=>{S.unlockAll=!S.unlockAll;save();parents()},
+  tgGamesNew:()=>{S.gamesNew=S.gamesNew===false;save();parents()},
   reset:()=>ask('Azzerare davvero tutti i progressi, le monete e le figurine?','doReset'),
   doReset:()=>{A.closeAsk();const n=S.name;S=def();S.name=n;save();Q=null;L=null;G=null;home();toast('Progressi azzerati ✅')}
 };
